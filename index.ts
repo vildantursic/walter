@@ -1,29 +1,51 @@
+/// <reference path="typings/tsd.d.ts" />
+
 import * as express from 'express';
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello from Vildan'));
+app.get('/', (req, res) => res.send('Hello from Me'));
 
-app.get('/app/:entity', (req, res) => {
+app.get('/api/:entity', (req, res) => {
 
-  let entity = req.params.entity
+  let entity:string = req.params.entity
+  res.send({
+    entity: entity,
+    method: "get"
+  });
 
-  const funn = {
-    "get": () => { return {method: "get"}},
-    "post": () => { return {method: "post"}},
-    "put": () => { return {method: "put"}},
-    "del": () => { return {method: "delete"}}
-  }
+});
 
-  try{
-    res.send(funn[entity]())
-  }
-  catch(e){
-    res.send("no such function");
-  }
+app.post('/api/:entity', (req, res) => {
+
+  let entity:string = req.params.entity
+  res.send({
+    entity: entity,
+    method: "post"
+  });
+
+});
+
+app.put('/api/:entity', (req, res) => {
+
+  let entity:string = req.params.entity
+  res.send({
+    entity: entity,
+    method: "put"
+  });
+
+});
+
+app.delete('/api/:entity', (req, res) => {
+
+  let entity:string = req.params.entity
+  res.send({
+    entity: entity,
+    method: "delete"
+  });
 
 });
 
 const server = app.listen(3000, "localhost", () => {
-   const {address, port} = server.address();
+   const port = server.address().port;
    console.log('Listening on http://localhost:' + port);
 });
