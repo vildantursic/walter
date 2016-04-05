@@ -1,12 +1,12 @@
 /// <reference path="../typings/main.d.ts" />
 
-import * as express from 'express';
-var router = express.Router();
+import * as express from "express";
+const router = express.Router();
 
-router.route('/api/:entity')
+router.route("/api/:entity")
   .get((req, res) => {
 
-    let entity:string = req.params.entity
+    let entity: string = req.params.entity;
     res.send({
       entity: entity,
       method: "get"
@@ -15,7 +15,7 @@ router.route('/api/:entity')
   })
   .post((req, res) => {
 
-    let entity:string = req.params.entity
+    let entity: string = req.params.entity;
     res.send({
       entity: entity,
       method: "post"
@@ -24,7 +24,7 @@ router.route('/api/:entity')
   })
   .put((req, res) => {
 
-    let entity:string = req.params.entity
+    let entity: string = req.params.entity;
     res.send({
       entity: entity,
       method: "put"
@@ -33,7 +33,7 @@ router.route('/api/:entity')
   })
   .delete((req, res) => {
 
-    let entity:string = req.params.entity
+    let entity: string = req.params.entity;
     res.send({
       entity: entity,
       method: "delete"
