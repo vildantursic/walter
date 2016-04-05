@@ -3,12 +3,18 @@
         "module": "commonjs",
         "target": "es6",
         "outDir": "build",
+        "declaration": false,
         "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
         "sourceMap": false
     },
+    "files": [
+      "index.ts",
+      "app/app.ts"
+    ],
     "exclude": [
         "node_modules",
-        "typings/main.d.ts",
-        "typings/browser"
+        "bower_components"
     ]
 }

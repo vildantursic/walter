@@ -1,44 +1,46 @@
 /// <reference path="../typings/main.d.ts" />
 
-import * as express from "express";
-const router = express.Router();
+import {Request, Response, Router} from "express";
+const router: Router = Router();
 
-router.route("/api/:entity")
-  .get((req, res) => {
+// not working with router.route(....)
+const api = router.route("/api/:entity");
 
-    let entity: string = req.params.entity;
-    res.send({
-      entity: entity,
-      method: "get"
-    });
+api.get((req, res) => {
 
-  })
-  .post((req, res) => {
-
-    let entity: string = req.params.entity;
-    res.send({
-      entity: entity,
-      method: "post"
-    });
-
-  })
-  .put((req, res) => {
-
-    let entity: string = req.params.entity;
-    res.send({
-      entity: entity,
-      method: "put"
-    });
-
-  })
-  .delete((req, res) => {
-
-    let entity: string = req.params.entity;
-    res.send({
-      entity: entity,
-      method: "delete"
-    });
-
+  let entity: string = req.params.entity;
+  res.send({
+    entity: entity,
+    method: "get"
   });
+
+});
+api.post((req, res) => {
+
+  let entity: string = req.params.entity;
+  res.send({
+    entity: entity,
+    method: "post"
+  });
+});
+
+api.put((req, res) => {
+
+  let entity: string = req.params.entity;
+  res.send({
+    entity: entity,
+    method: "put"
+  });
+
+});
+api.delete((req, res) => {
+
+  let entity: string = req.params.entity;
+  res.send({
+    entity: entity,
+    method: "delete"
+  });
+
+});
 
 export const comment = router;
