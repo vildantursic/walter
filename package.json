@@ -1,0 +1,20 @@
+{
+  "name": "xtype",
+  "version": "1.0.0",
+  "description": "express with typescript ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon build/index.js"
+  },
+  "keywords": [
+    "expressjs",
+    "typescript",
+    "node",
+    "es6"
+  ],
+  "author": "Vildan Tursic",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
