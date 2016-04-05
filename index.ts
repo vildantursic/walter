@@ -1,49 +1,13 @@
-/// <reference path="typings/tsd.d.ts" />
+/// <reference path="typings/main.d.ts" />
 
 import * as express from 'express';
+import {Request, Response} from 'express';
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello from Me'));
+//importing API
+import {comment} from './app/app';
 
-app.get('/api/:entity', (req, res) => {
-
-  let entity:string = req.params.entity
-  res.send({
-    entity: entity,
-    method: "get"
-  });
-
-});
-
-app.post('/api/:entity', (req, res) => {
-
-  let entity:string = req.params.entity
-  res.send({
-    entity: entity,
-    method: "post"
-  });
-
-});
-
-app.put('/api/:entity', (req, res) => {
-
-  let entity:string = req.params.entity
-  res.send({
-    entity: entity,
-    method: "put"
-  });
-
-});
-
-app.delete('/api/:entity', (req, res) => {
-
-  let entity:string = req.params.entity
-  res.send({
-    entity: entity,
-    method: "delete"
-  });
-
-});
+app.use('/', comment);
 
 const server = app.listen(3000, "localhost", () => {
    const port = server.address().port;
