@@ -7,7 +7,7 @@
     "start": "concurrently \"npm run tsc:w\" \"npm run service\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "service": "nodemon build/index.js",
+    "service": "nodemon build/app.js",
     "typings": "typings",
     "postinstall": "typings install"
   },
