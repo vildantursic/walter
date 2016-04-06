@@ -9,12 +9,7 @@
         "noLib": false,
         "sourceMap": false
     },
-    "files": [
-      "index.ts",
-      "app/apiRoute.ts"
-    ],
     "exclude": [
-        "node_modules",
-        "bower_components"
+        "node_modules"
     ]
 }
