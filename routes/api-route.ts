@@ -9,7 +9,7 @@ const api = router.route("/api/:entity");
 api.get((req: Request, res: Response) => {
 
   let entity: string = req.params.entity;
-  res.send({
+  res.json({
     entity: entity,
     method: "get"
   });
@@ -35,7 +35,7 @@ api.put((req: Request, res: Response) => {
 api.delete((req: Request, res: Response) => {
 
   let entity: string = req.params.entity;
-  res.send({
+  res.json({
     entity: entity,
     method: "delete"
   });
