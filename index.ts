@@ -1,7 +1,7 @@
 /// <reference path="typings/main.d.ts" />
 
 import * as express from "express";
-const app = express();
+const app: express.Application = express();
 
 // importing API
 import {comment} from "./app/app";
