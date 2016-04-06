@@ -11,7 +11,7 @@
     },
     "files": [
       "index.ts",
-      "app/app.ts"
+      "app/apiRoute.ts"
     ],
     "exclude": [
         "node_modules",

@@ -44,4 +44,4 @@ api.delete((req: Request, res: Response) => {
 
 });
 
-export const comment = router;
+export const apiRoute = router;
