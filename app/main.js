@@ -14,8 +14,9 @@ System.register(["angular2/platform/browser", "angular2/http", "./app.components
                 app_components_1 = app_components_1_1;
             }],
         execute: function() {
-            browser_1.bootstrap(app_components_1.AppComponent, [http_1.HTTP_PROVIDERS])
-                .catch(console.error);
+            browser_1.bootstrap(app_components_1.AppComponent, [
+                http_1.HTTP_PROVIDERS
+            ]);
         }
     }
 });

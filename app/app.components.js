@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/http"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11,7 +11,7 @@ System.register(["angular2/core", "angular2/http"], function(exports_1, context_
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var Hero, AppComponent, HEROES;
+    var Hero, AppComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -19,7 +19,8 @@ System.register(["angular2/core", "angular2/http"], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             Hero = (function () {
                 function Hero() {
@@ -29,15 +30,15 @@ System.register(["angular2/core", "angular2/http"], function(exports_1, context_
             exports_1("Hero", Hero);
             AppComponent = (function () {
                 function AppComponent(http) {
+                    var _this = this;
                     this.title = "Our Heroes";
                     this.hero = {
                         id: 1,
                         name: "Windstorm"
                     };
-                    this.heroes = HEROES;
-                    this.myhero = {};
-                    this.myhero = http.get("http://localhost:4000/api/comment")
-                        .map(function (response) { return response.json(); });
+                    http.get("http://localhost:4000/api/heroes")
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (myHeroes) { return _this.myHeroes = myHeroes; });
                 }
                 AppComponent = __decorate([
                     core_1.Component({
@@ -50,19 +51,19 @@ System.register(["angular2/core", "angular2/http"], function(exports_1, context_
                 return AppComponent;
             }());
             exports_1("AppComponent", AppComponent);
-            HEROES = [
-                { "id": 11, "name": "Mr. Nice" },
-                { "id": 12, "name": "Narco" },
-                { "id": 13, "name": "Bombasto" },
-                { "id": 14, "name": "Celeritas" },
-                { "id": 15, "name": "Magneta" },
-                { "id": 16, "name": "RubberMan" },
-                { "id": 17, "name": "Dynama" },
-                { "id": 18, "name": "Dr IQ" },
-                { "id": 19, "name": "Magma" },
-                { "id": 20, "name": "Tornado" }
-            ];
         }
     }
 });
+// let HEROES: Hero[] = [
+//   { "id": 11, "name": "Mr. Nice" },
+//   { "id": 12, "name": "Narco" },
+//   { "id": 13, "name": "Bombasto" },
+//   { "id": 14, "name": "Celeritas" },
+//   { "id": 15, "name": "Magneta" },
+//   { "id": 16, "name": "RubberMan" },
+//   { "id": 17, "name": "Dynama" },
+//   { "id": 18, "name": "Dr IQ" },
+//   { "id": 19, "name": "Magma" },
+//   { "id": 20, "name": "Tornado" }
+// ];
 //# sourceMappingURL=app.components.js.map
