@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], function(exports_1, context_1) {
+System.register(["angular2/core", "./hero-detail.component", "./hero.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,43 +10,43 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
-    var Hero, AppComponent;
+    var core_1, hero_detail_component_1, hero_service_1;
+    var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (http_1_1) {
-                http_1 = http_1_1;
+            function (hero_detail_component_1_1) {
+                hero_detail_component_1 = hero_detail_component_1_1;
             },
-            function (_1) {}],
+            function (hero_service_1_1) {
+                hero_service_1 = hero_service_1_1;
+            }],
         execute: function() {
-            Hero = (function () {
-                function Hero() {
-                }
-                return Hero;
-            }());
-            exports_1("Hero", Hero);
             AppComponent = (function () {
-                function AppComponent(http) {
-                    var _this = this;
-                    this.title = "Our Heroes";
-                    this.hero = {
-                        id: 1,
-                        name: "Windstorm"
-                    };
-                    http.get("http://localhost:4000/api/heroes")
-                        .map(function (res) { return res.json(); })
-                        .subscribe(function (myHeroes) { return _this.myHeroes = myHeroes; });
+                function AppComponent(_heroService) {
+                    this._heroService = _heroService;
+                    this.title = "Our Server Heroes";
                 }
+                AppComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
+                AppComponent.prototype.getHeroes = function () {
+                    var _this = this;
+                    this._heroService.getHeroes()
+                        .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return console.log("Error"); });
+                };
+                AppComponent.prototype.ngOnInit = function () {
+                    this.getHeroes();
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: "app",
-                        templateUrl: "views/main.html",
-                        styleUrls: ["styles/main.css"]
+                        templateUrl: "views/app-component.html",
+                        styleUrls: ["styles/main.css"],
+                        directives: [hero_detail_component_1.HeroDetailComponent],
+                        providers: [hero_service_1.HeroService]
                     }), 
-                    __metadata('design:paramtypes', [http_1.Http])
+                    __metadata('design:paramtypes', [hero_service_1.HeroService])
                 ], AppComponent);
                 return AppComponent;
             }());
@@ -54,16 +54,4 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
         }
     }
 });
-// let HEROES: Hero[] = [
-//   { "id": 11, "name": "Mr. Nice" },
-//   { "id": 12, "name": "Narco" },
-//   { "id": 13, "name": "Bombasto" },
-//   { "id": 14, "name": "Celeritas" },
-//   { "id": 15, "name": "Magneta" },
-//   { "id": 16, "name": "RubberMan" },
-//   { "id": 17, "name": "Dynama" },
-//   { "id": 18, "name": "Dr IQ" },
-//   { "id": 19, "name": "Magma" },
-//   { "id": 20, "name": "Tornado" }
-// ];
 //# sourceMappingURL=app.components.js.map
