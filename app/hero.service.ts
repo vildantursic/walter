@@ -8,14 +8,23 @@ export class HeroService {
 
   constructor(private http: Http) { }
 
-  private _heroesUrl: string = "http://localhost:4000/api/heroes";
+  private _heroesUrl: string = "http://localhost:4000/api/";
 
   getHeroes () {
-    return this.http.get(this._heroesUrl)
+    return this.http.get(this._heroesUrl + "heroes")
       .map((res: Response) => <Hero[]> res.json())
       .do((data: Object ) => console.log(data))
       .catch(this.handleError);
   }
+  //////////////////////////
+
+  getHero(id: number) {
+    return this.http.get(this._heroesUrl + "hero" + id)
+      .map((res: Response) => res.json())
+      .do((data: Object ) => console.log(data))
+      .catch(this.handleError);
+  }
+  //////////////////////////
 
   addHero (name: string): Observable<Hero>  {
 
@@ -27,6 +36,7 @@ export class HeroService {
                     .map((res: Response) =>  <Hero> res.json())
                     .catch(this.handleError);
   }
+  //////////////////////////
 
   private handleError (error: Response) {
     console.error(error);
