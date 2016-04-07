@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   public title = "Our Server Heroes";
   public selectedHero: Hero;
 
-  public heroes: Object;
+  public heroes: Array<Hero>;
 
   onSelect(hero: Hero) { this.selectedHero = hero; }
 
@@ -24,7 +24,15 @@ export class AppComponent implements OnInit {
     this._heroService.getHeroes()
                    .subscribe(
                      heroes => this.heroes = heroes,
-                     error =>  console.log("Error"));
+                     error =>  console.log("Error white calling heroes"));
+  }
+
+  addHero (name: string) {
+    if (!name) { return; }
+    this._heroService.addHero(name)
+                     .subscribe(
+                       hero  => this.heroes.push(hero),
+                       error =>  console.log("Error white sending heroes"));
   }
 
   ngOnInit() {
