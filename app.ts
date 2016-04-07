@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
-app.use("/", bruteforce.prevent, apiRoute);
+app.use("/", apiRoute);
 
 const server = app.listen(4000, "localhost", () => {
    const port: number = server.address().port;
