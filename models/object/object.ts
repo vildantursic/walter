@@ -34,4 +34,4 @@ let schema: Schema = new Schema({
     material: { type: Array , "default": {} }
 });
 
-export const object = schema;
+export const object: Schema = schema;
