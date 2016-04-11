@@ -2,28 +2,22 @@
 
 import {Request, Response, Router} from "express";
 const router: Router = Router();
+import {model, Document} from "mongoose";
+import {object} from "../models/object/object";
 
-// not working with router.route(....)
+import IObject = require("../models/object/IObject");
+
+const _objectModel = model <IObject> ("Object", object);
+
 const api = router.route("/api/:entity");
 
 api.get((req: Request, res: Response) => {
 
   let entity: string = req.params.entity;
 
-  let heroes = [
-    { "id": 11, "name": "Mr. Nice" },
-    { "id": 12, "name": "Narco 2" },
-    { "id": 13, "name": "Bombasto" },
-    { "id": 14, "name": "Celeritas" },
-    { "id": 15, "name": "Magneta" },
-    { "id": 16, "name": "RubberMan" },
-    { "id": 17, "name": "Dynama" },
-    { "id": 18, "name": "Dr IQ" },
-    { "id": 19, "name": "Magma" },
-    { "id": 20, "name": "Tornado" }
-  ];
+  // Get object
 
-  res.json(heroes);
+  res.json("nothing");
 
 });
 api.post((req: Request, res: Response) => {
@@ -31,6 +25,8 @@ api.post((req: Request, res: Response) => {
   let entity: string = req.params.entity;
 
   let reqObject: Object = req.body;
+  // Create object
+
   res.json(reqObject);
 
 });
