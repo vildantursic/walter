@@ -23,6 +23,7 @@ export class HeroService {
       .map((res: Response) => res.json())
       .do((data: Object ) => console.log(data))
       .catch(this.handleError);
+
   }
   //////////////////////////
 

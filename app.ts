@@ -5,6 +5,9 @@ import {urlencoded, json} from "body-parser";
 import * as expressBrute from "express-brute";
 const app: express.Application = express();
 
+app.use(express.static("./public"));
+app.use(express.static("./public/node_modules"));
+
 let bruteForceConf = {
   freeRetries: 5,
   proxyDepth: 1,
@@ -17,23 +20,17 @@ const bruteforce = new expressBrute(store);
 
 // importing API
 import {apiRoute} from "./routes/api-route";
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+//
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
 app.use("/", apiRoute);
-
-app.use("/", express.static(__dirname + "public"));
-
-app.get("/", function (req, res) {
-  res.send("index.html");
-});
 
 const server = app.listen(4000, "localhost", () => {
    const port: number = server.address().port;

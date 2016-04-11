@@ -1,8 +1,0 @@
-node_modules
-typings
-build
-*.js
-*.js.map
-*.map
-*.log
-.idea

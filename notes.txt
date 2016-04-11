@@ -1,0 +1,2 @@
+= tslint init
+= desfinisati node_modules za angular
