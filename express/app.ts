@@ -29,6 +29,12 @@ app.use(json());
 
 app.use("/", apiRoute);
 
+app.use("/", express.static(__dirname + "public"));
+
+app.get("/", function (req, res) {
+  res.send("index.html");
+});
+
 const server = app.listen(4000, "localhost", () => {
    const port: number = server.address().port;
    console.log("Listening on http://localhost:" + port);
