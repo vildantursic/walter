@@ -8,7 +8,7 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "service": "nodemon build/app.js",
-    "typings": "typings",
+    "typings": "./typings",
     "postinstall": "typings install"
   },
   "keywords": [
