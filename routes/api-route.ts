@@ -15,6 +15,7 @@ api.get((req: Request, res: Response) => {
   res.json("nothing");
 
 });
+
 api.post((req: Request, res: Response) => {
 
   let entity: string = req.params.entity;
@@ -34,6 +35,7 @@ api.put((req: Request, res: Response) => {
   res.json(reqObject);
 
 });
+
 api.delete((req: Request, res: Response) => {
 
   let entity: string = req.params.entity;

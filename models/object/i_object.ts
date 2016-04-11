@@ -2,7 +2,7 @@
 
 import {Document} from "mongoose";
 
-interface IObject extends Document {
+export interface IObject extends Document {
     _id: string;
     guid: string;
     complex: Object;
@@ -21,5 +21,3 @@ interface IObject extends Document {
     geometry: Array<Object>;
     material: Array<Object>;
 }
-
-export = IObject;
