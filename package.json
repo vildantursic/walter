@@ -1,13 +1,13 @@
 {
   "name": "xtype",
   "version": "1.0.0",
-  "description": "express with typescript ",
+  "description": "express with typescript",
   "main": "index.js",
   "scripts": {
-    "start": "npm run tsc:w && npm run build:run",
+    "start": "npm run nmon && npm run tsc:w",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "build:run": "nodemon build/app.js",
+    "nmon": "nodemon build/app.js",
     "typings": "typings",
     "postinstall": "typings install"
   },
