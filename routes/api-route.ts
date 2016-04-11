@@ -2,12 +2,7 @@
 
 import {Request, Response, Router} from "express";
 const router: Router = Router();
-import {model, Document} from "mongoose";
-import {object} from "../models/object/object";
-
-import IObject = require("../models/object/IObject");
-
-const _objectModel = model <IObject> ("Object", object);
+import {objectModel} from "../models/object-model";
 
 const api = router.route("/api/:entity");
 

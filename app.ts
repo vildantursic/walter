@@ -2,18 +2,11 @@
 
 import * as express from "express";
 import {urlencoded, json} from "body-parser";
-import * as mongoose from "mongoose";
-
+import {conn} from "./connections/connection";
 // import * as expressBrute from "express-brute";
 const app: express.Application = express();
 
-mongoose.connect("mongodb://ds064188.mlab.com:64188/walter");
-
-let db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
-   console.log("we are connected");
-});
+conn;
 
 // app.use(express.static("./public"));
 // app.use(express.static("./public/node_modules"));
