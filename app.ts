@@ -5,8 +5,8 @@ import {urlencoded, json} from "body-parser";
 // import * as expressBrute from "express-brute";
 const app: express.Application = express();
 
-app.use(express.static("./public"));
-app.use(express.static("./public/node_modules"));
+// app.use(express.static("./public"));
+// app.use(express.static("./public/node_modules"));
 
 // let bruteForceConf = {
 //   freeRetries: 5,

@@ -4,11 +4,11 @@
   "description": "express with typescript ",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"npm run service\" ",
+    "start": "npm run tsc:w && npm run build:run",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "service": "nodemon build/app.js",
-    "typings": "./typings",
+    "build:run": "nodemon build/app.js",
+    "typings": "typings",
     "postinstall": "typings install"
   },
   "keywords": [
@@ -22,7 +22,8 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
-    "express-brute": "^0.6.0"
+    "express-brute": "^0.6.0",
+    "nodemon": "^1.9.1"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
