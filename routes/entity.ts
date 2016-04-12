@@ -4,20 +4,20 @@ import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {entityModel} from "../models/models";
 
-const api = router.route("/api/entity/:entity");
+const api = router.route("/api/entity/:id*?");
 
 api.get((req: Request, res: Response) => {
 
-    let entity: string = req.params.entity;
-    if (entity === "all") {
-        entityModel.find((err, data) => {
+    let id: string = req.params.id;
+    if (id) {
+        entityModel.find({_id: id}, (err, data) => {
             if (err) throw err;
 
             res.json(data);
         });
     }
     else {
-        entityModel.find({_id: entity}, (err, data) => {
+        entityModel.find((err, data) => {
             if (err) throw err;
             res.json(data);
         });
@@ -26,14 +26,7 @@ api.get((req: Request, res: Response) => {
 
 api.post((req: Request, res: Response) => {
 
-    console.log("posted");
-
-    let data: Object = {
-        id: req.body.id,
-        name: req.body.name,
-        address: req.body.address
-    };
-
+    let data = req.body;
     let complex = new entityModel(data);
     complex.save((err) => {
         if (err) throw err;
@@ -43,7 +36,7 @@ api.post((req: Request, res: Response) => {
 
 api.put((req: Request, res: Response) => {
 
-    let id: string = req.params.entity;
+    let id: string = req.params.id;
     entityModel.update({ _id: id }, { $set: { name: req.body.name }}, (err, data) => {
         if (err) throw err;
         res.json(data);
@@ -52,7 +45,7 @@ api.put((req: Request, res: Response) => {
 
 api.delete((req: Request, res: Response) => {
 
-    let id: string = req.params.entity;
+    let id: string = req.params.id;
     entityModel.findByIdAndRemove(id, (err, data) => {
         if (err) throw err;
         res.json(data);

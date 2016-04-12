@@ -22,7 +22,6 @@ conn;
 // const bruteforce = new expressBrute(store);
 
 // importing API
-import {apiRoute} from "./routes/api-route";
 import {apiComplex} from "./routes/complex";
 import {apiEntity} from "./routes/entity";
 import {apiObject} from "./routes/object";
@@ -30,7 +29,6 @@ import {apiObject} from "./routes/object";
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
-app.use("/", apiRoute);
 app.use("/", apiComplex);
 app.use("/", apiEntity);
 app.use("/", apiObject);
