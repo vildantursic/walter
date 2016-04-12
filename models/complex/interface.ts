@@ -6,5 +6,4 @@ export interface IComplex extends Document {
     _id: string;
     name: string;
     address: string;
-    entity: Object;
 }

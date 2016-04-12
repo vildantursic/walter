@@ -3,6 +3,7 @@
 import {Schema} from "mongoose";
 
 export let schema: Schema = new Schema({
+    _id: String,
     name: String,
     address: String,
     location: [{
@@ -10,5 +11,3 @@ export let schema: Schema = new Schema({
         lng : String
     }]
 });
-
-// export const complex: Schema = schema;

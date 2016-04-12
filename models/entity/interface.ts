@@ -4,8 +4,6 @@ import {Document} from "mongoose";
 
 export interface IEntity extends Document {
     _id: string;
-    complex: Object;
-    displayName: Object;
     name: string;
     address: string;
     location: Array<Object>;

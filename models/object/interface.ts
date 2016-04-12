@@ -6,7 +6,6 @@ export interface IObject extends Document {
     _id: string;
     guid: string;
     complex: String;
-    displayName: Object;
     name: string;
     address: string;
     location: Array<Object>;

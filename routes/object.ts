@@ -2,7 +2,7 @@
 
 import {Request, Response, Router} from "express";
 const router: Router = Router();
-import {_objectModel} from "../models/models";
+import {objectModel, complexModel} from "../models/models";
 
 const api = router.route("/api/object/:entity");
 
@@ -10,14 +10,14 @@ api.get((req: Request, res: Response) => {
 
     let entity: string = req.params.entity;
     if (entity === "all") {
-        _objectModel.find((err, data) => {
+        objectModel.find((err, data) => {
             if (err) throw err;
 
             res.json(data);
         });
     }
     else {
-        _objectModel.find({_id: entity}, (err, data) => {
+        objectModel.find({_id: entity}, (err, data) => {
             if (err) throw err;
             res.json(data);
         });
@@ -28,20 +28,20 @@ api.post((req: Request, res: Response) => {
 
     console.log("posted");
 
+    // let complexData: Object = {
+    //     name: req.body.name,
+    //     address: req.body.address,
+    //     location: [{
+    //         lat : req.body.lat,
+    //         lng : req.body.lng
+    //     }]
+    // };
+
+    // Have question about populating data to this object
     let data: Object = {
         guid: "1234567890",
-        complex: {
-            name: "name 1",
-            address: "address 1",
-            location: [{
-                lat : "43",
-                lng : "18"
-            }]
-        },
-        entity: {
-            name: "name 2",
-            address: "address 2",
-        },
+        complex: "570cc35ce1a718602d5d790e",
+        entity: "570ceb5ca6bf8cf002d32db0",
         model: "model 1",
         category: "category 1",
         group: "group 1",
@@ -54,7 +54,7 @@ api.post((req: Request, res: Response) => {
         material: [{id: "789"}, {id: "987"}]
     };
 
-    let complex = new _objectModel(data);
+    let complex = new objectModel(data);
     complex.save((err) => {
         if (err) throw err;
         res.json("Document is saved");
@@ -63,10 +63,8 @@ api.post((req: Request, res: Response) => {
 
 api.put((req: Request, res: Response) => {
 
-    console.log(req.body.key);
-
     let id: string = req.params.entity;
-    _objectModel.update({ _id: id }, { $set: { name: req.body.name }}, (err, data) => {
+    objectModel.update({ _id: id }, { $set: req.body}, (err, data) => {
         if (err) throw err;
         res.json(data);
     });
@@ -75,7 +73,7 @@ api.put((req: Request, res: Response) => {
 api.delete((req: Request, res: Response) => {
 
     let id: string = req.params.entity;
-    _objectModel.findByIdAndRemove(id, (err, data) => {
+    objectModel.findByIdAndRemove(id, (err, data) => {
         if (err) throw err;
         res.json(data);
     });
