@@ -1,26 +1,21 @@
 /// <reference path="../../typings/main.d.ts" />
 
 import {Schema} from "mongoose";
+import {_complexModel, _entityModel} from "../models";
 
-let schema: Schema = new Schema({
+export let schema: Schema = new Schema({
     _id: Schema.Types.ObjectId,
     guid: {
         type: String,
         require: true
     },
     complex: {
-        name: String,
-        address: String,
-        location: [{
-            lat : String,
-            lng : String
-        }],
-        _id: String
+        type: String,
+        required: true
     },
     entity: {
-        name: String,
-        address: String,
-        _id: String
+        type: String,
+        required: true
     },
     model: String,
     category: String,
@@ -34,4 +29,4 @@ let schema: Schema = new Schema({
     material: { type: Array , "default": {} }
 });
 
-export const object: Schema = schema;
+// export const object: Schema = schema;

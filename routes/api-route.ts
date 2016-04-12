@@ -2,7 +2,6 @@
 
 import {Request, Response, Router} from "express";
 const router: Router = Router();
-import {objectModel} from "../models/object-model";
 
 const api = router.route("/api/:entity");
 
