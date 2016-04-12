@@ -46,15 +46,13 @@ api.post((req: Request, res: Response) => {
 
 api.put((req: Request, res: Response) => {
 
+    console.log(req.body.key);
+
     let id: string = req.params.entity;
     _complexModel.update({ _id: id }, { $set: { name: req.body.name }}, (err, data) => {
         if (err) throw err;
         res.json(data);
     });
-    // _complexModel.findOneAndUpdate({ _id: req.body.id }, { $set: { complex: { name: req.body.name }}}, (err, data) => {
-    //     if (err) throw err;
-    //     res.json(data);
-    // });
 });
 
 api.delete((req: Request, res: Response) => {

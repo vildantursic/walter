@@ -4,18 +4,18 @@ import {Schema} from "mongoose";
 import {_complexModel, _entityModel} from "../models";
 
 export let schema: Schema = new Schema({
-    _id: Schema.Types.ObjectId,
+    // _id: Schema.Types.ObjectId,
     guid: {
         type: String,
         require: true
     },
     complex: {
-        type: String,
+        type: Object,
         ref: "Complex",
         required: true
     },
     entity: {
-        type: String,
+        type: Object,
         ref: "Entity",
         required: true
     },
