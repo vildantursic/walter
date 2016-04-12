@@ -11,10 +11,12 @@ export let schema: Schema = new Schema({
     },
     complex: {
         type: String,
+        ref: "Complex",
         required: true
     },
     entity: {
         type: String,
+        ref: "Entity",
         required: true
     },
     model: String,
