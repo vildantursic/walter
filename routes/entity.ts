@@ -22,4 +22,4 @@ api.delete((req: Request, res: Response) => {
 
 });
 
-export const apiRoute = router;
+export const apiEntity = router;

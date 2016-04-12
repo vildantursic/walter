@@ -23,11 +23,17 @@ conn;
 
 // importing API
 import {apiRoute} from "./routes/api-route";
+import {apiComplex} from "./routes/complex";
+import {apiEntity} from "./routes/entity";
+import {apiObject} from "./routes/object";
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
 app.use("/", apiRoute);
+app.use("/", apiComplex);
+app.use("/", apiEntity);
+app.use("/", apiObject);
 
 const server = app.listen(4000, "localhost", () => {
    const port: number = server.address().port;

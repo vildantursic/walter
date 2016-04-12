@@ -1,7 +1,11 @@
 import * as mongoose from "mongoose";
 import {Connection} from "mongoose";
 
-mongoose.connect("mongodb://ds064188.mlab.com:64188/walter");
+let options = {
+    user: "walter",
+    pass: "K6akD4IzZM9a"
+};
+mongoose.connect("mongodb://ds064188.mlab.com:64188/walter", options);
 
 let db: Connection = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
