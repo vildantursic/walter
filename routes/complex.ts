@@ -29,14 +29,12 @@ api.post((req: Request, res: Response) => {
     console.log("posted");
 
     let data: Object = {
-        complex: {
-            name: req.body.name,
-            address: req.body.address,
-            location: [{
-                lat : req.body.lat,
-                lng : req.body.lng
-            }]
-        }
+        name: req.body.name,
+        address: req.body.address,
+        location: [{
+            lat : req.body.lat,
+            lng : req.body.lng
+        }]
     };
 
     let complex = new _complexModel(data);
