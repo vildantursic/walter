@@ -1,7 +1,7 @@
 import {model, Model} from "mongoose";
 import {schema} from "./schema";
-import {IObject} from "./interface.ts";
+import {IEntity} from "./interface.ts";
 
-export const _entityModel: Model<IObject> = model<IObject> ("Entity", schema);
+export const _entityModel: Model<IEntity> = model<IEntity> ("Entity", schema);
 
 // export const entityModel: Model<IObject> = _entityModel;

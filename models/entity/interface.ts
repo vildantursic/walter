@@ -2,7 +2,7 @@
 
 import {Document} from "mongoose";
 
-export interface IObject extends Document {
+export interface IEntity extends Document {
     _id: string;
     complex: Object;
     displayName: Object;
