@@ -9,19 +9,11 @@ const api = router.route("/api/entity/:id*?");
 api.get((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    if (id) {
-        entityModel.find({_id: id}, (err, data) => {
-            if (err) throw err;
+    entityModel.find({_id: id}, (err, data) => {
+        if (err) throw err;
 
-            res.json(data);
-        });
-    }
-    else {
-        entityModel.find((err, data) => {
-            if (err) throw err;
-            res.json(data);
-        });
-    }
+        res.json(data);
+    });
 });
 
 api.post((req: Request, res: Response) => {

@@ -3,7 +3,6 @@
 import {Schema} from "mongoose";
 
 export let schema: Schema = new Schema({
-    _id: Schema.Types.ObjectId,
     guid: {
         type: String,
         require: true

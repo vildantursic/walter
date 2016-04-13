@@ -9,18 +9,10 @@ const api = router.route("/api/object/:id*?");
 api.get((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    if (id) {
-        objectModel.find({_id: id}, (err, data) => {
-            if (err) throw err;
-            res.json(data);
-        });
-    }
-    else {
-        objectModel.find((err, data) => {
-            if (err) throw err;
-            res.json(data);
-        });
-    }
+    objectModel.find({_id: id}, (err, data) => {
+        if (err) throw err;
+        res.json(data);
+    });
 });
 
 api.post((req: Request, res: Response) => {
