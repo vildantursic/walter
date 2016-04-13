@@ -8,20 +8,20 @@ const api = router.route("/api/complex/:id*?");
 
 api.get((req: Request, res: Response) => {
 
-    let entity: string = req.params.entity;
+    let id: string = req.params.id;
 
-    if (entity !== undefined) {
-        complexModel.find({_id: entity}, (err, data) => {
+    // if (entity !== undefined) {
+        complexModel.find({_id: id}, (err, data) => {
             if (err) throw err;
             res.json(data);
         });
-    }
-    else {
-        complexModel.find((err, data) => {
-            if (err) throw err;
-            res.json(data);
-        });
-    }
+    // }
+    // else {
+    //     complexModel.find((err, data) => {
+    //         if (err) throw err;
+    //         res.json(data);
+    //     });
+    // }
 });
 
 api.post((req: Request, res: Response) => {

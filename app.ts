@@ -2,11 +2,9 @@
 
 import * as express from "express";
 import {urlencoded, json} from "body-parser";
-import {conn} from "./connections/connection";
 // import * as expressBrute from "express-brute";
 const app: express.Application = express();
 
-conn;
 
 // app.use(express.static("./public"));
 // app.use(express.static("./public/node_modules"));
