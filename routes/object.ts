@@ -3,44 +3,50 @@
 import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {objectModel} from "../models/models";
+import {checkData, returnObject, checkIfDataIsArray} from "../functions/validation";
 
 const api = router.route("/api/object/:id*?");
 
-api.get((req: Request, res: Response) => {
-
-    let id: string = req.params.id;
-    objectModel.find({_id: id}, (err, data) => {
-        if (err) throw err;
-        res.json(data);
-    });
+api.get(async (req: Request, res: Response) => {
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for search");
+    } else {
+        let obj: Object = await objectModel.find({_id: req.params.id}).exec(returnObject);
+        res.json(obj);
+    }
 });
 
 api.post((req: Request, res: Response) => {
 
-    let data = req.body;
-    let complex = new objectModel(data);
-    complex.save((err) => {
-        if (err) throw err;
-        res.json("Document is saved");
-    });
-});
+    // check data before saving also could do validation within function
+    let obj: Array<Object> = checkIfDataIsArray(req.body).then((data: Array<Object>) => { console.log(data); });
 
-api.put((req: Request, res: Response) => {
-
-    let id: string = req.params.id;
-    objectModel.update({ _id: id }, { $set: req.body}, (err, data) => {
-        if (err) throw err;
+    objectModel.insertMany(obj, (err: Error, data: Object) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
 });
 
-api.delete((req: Request, res: Response) => {
+api.put(async (req: Request, res: Response) => {
 
-    let id: string = req.params.id;
-    objectModel.findByIdAndRemove(id, (err, data) => {
-        if (err) throw err;
-        res.json(data);
-    });
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for update");
+    } else {
+        let obj: Object = await objectModel.update({ _id: req.params.id }, { $set: req.body }).exec(returnObject);
+        res.json(obj);
+    }
+});
+
+api.delete(async (req: Request, res: Response) => {
+
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for deletion");
+    } else {
+        let obj: Object = await objectModel.findByIdAndRemove(req.params.id).exec(returnObject);
+        res.json(obj);
+    }
 });
 
 export const apiObject = router;

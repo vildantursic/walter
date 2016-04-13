@@ -3,36 +3,25 @@
 import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {entityModel} from "../models/models";
+import {checkData, checkIfDataIsArray, returnObject} from "../functions/validation";
 
 const api = router.route("/api/entity/:id*?");
 
-api.get((req: Request, res: Response) => {
-
-    let id: string = req.params.id;
-    entityModel.find({_id: id}, (err: Error, data: Array<Object>) => {
-        if (err) {
-            throw err;
-        }
-        res.json(data);
-    });
+api.get(async (req: Request, res: Response) => {
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for search");
+    } else {
+        let obj: Object = await entityModel.find({_id: req.params.id}).exec(returnObject);
+        res.json(obj);
+    }
 });
 
 api.post((req: Request, res: Response) => {
 
-    let data = req.body;
-    let complex = new entityModel(data);
-    complex.save((err) => {
-        if (err) {
-            throw err;
-        }
-        res.json("Document is saved");
-    });
-});
+    // check data before saving also could do validation within function
+    let obj: Array<Object> = checkIfDataIsArray(req.body);
 
-api.put((req: Request, res: Response) => {
-
-    let id: string = req.params.id;
-    entityModel.update({ _id: id }, { $set: { name: req.body.name }}, (err: Error, data: Array<Object>) => {
+    entityModel.insertMany(obj, (err: Error, data: Object) => {
         if (err) {
             throw err;
         }
@@ -40,16 +29,24 @@ api.put((req: Request, res: Response) => {
     });
 });
 
-api.delete((req: Request, res: Response) => {
+api.put(async (req: Request, res: Response) => {
 
-    let id: string = req.params.id;
-    entityModel.findByIdAndRemove(id, (err: Error, data: Array<Object>) => {
-        if (err) {
-            throw err;
-        }
-        res.json(data);
-    });
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for update");
+    } else {
+        let obj: Object = await entityModel.update({ _id: req.params.id }, { $set: req.body }).exec(returnObject);
+        res.json(obj);
+    }
 });
 
+api.delete(async (req: Request, res: Response) => {
+
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for deletion");
+    } else {
+        let obj: Object = await entityModel.findByIdAndRemove(req.params.id).exec(returnObject);
+        res.json(obj);
+    }
+});
 
 export const apiEntity = router;
