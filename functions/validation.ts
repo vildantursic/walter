@@ -12,11 +12,4 @@ let checkIfDataIsArray: Function = (data): Array<Object> => {
     }
 };
 
-let returnObject: Function = (err: Error, data: Object) => {
-    if (err) {
-        throw err;
-    }
-    return data;
-};
-
-export {checkData, checkIfDataIsArray, returnObject};
+export {checkData, checkIfDataIsArray};
