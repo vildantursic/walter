@@ -5,11 +5,17 @@ const router: Router = Router();
 import {complexModel} from "../models/models";
 
 let checkData: Function = (param: String): Boolean => {
-    // add more filters to data to see if it fit your needs
-    if (param.length === 24) {
-        return true;
+    // add more filters and if statement for data to see if it fit your needs
+    return param.length === 24;
+};
+let checkIfDataIsArray: Function = (data): Array<Object> => {
+    if (Array.isArray(data)) {
+        return data;
+    } else {
+        let arr: Array<Object> = [];
+        arr.push(data);
+        return arr;
     }
-    return false;
 };
 
 let returnObject: Function = (err: Error, data: Object) => {
@@ -32,9 +38,10 @@ api.get(async (req: Request, res: Response) => {
 
 api.post((req: Request, res: Response) => {
 
-    // check data before saving
-    let obj = new complexModel(req.body);
-    obj.save((err: Error, data: Object) => {
+    // check data before saving also could do validation within function
+    let obj: Array<Object> = checkIfDataIsArray(req.body);
+
+    complexModel.insertMany(obj, (err: Error, data: Object) => {
         if (err) {
             throw err;
         }
@@ -44,16 +51,22 @@ api.post((req: Request, res: Response) => {
 
 api.put(async (req: Request, res: Response) => {
 
-    let id: string = req.params.id;
-    let obj: Object = await complexModel.update({ _id: id }, { $set: req.body }).exec(returnObject);
-    res.json(obj);
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for update");
+    } else {
+        let obj: Object = await complexModel.update({ _id: req.params.id }, { $set: req.body }).exec(returnObject);
+        res.json(obj);
+    }
 });
 
 api.delete(async (req: Request, res: Response) => {
 
-    let id: string = req.params.id;
-    let obj: Object = await complexModel.findByIdAndRemove(id).exec(returnObject);
-    res.json(obj);
+    if (!checkData(req.params.id)) {
+        res.json("invalid object for deletion");
+    } else {
+        let obj: Object = await complexModel.findByIdAndRemove(req.params.id).exec(returnObject);
+        res.json(obj);
+    }
 });
 
 export const apiComplex = router;

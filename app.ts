@@ -10,7 +10,9 @@ import {apiComplex} from "./routes/complex";
 import {apiEntity} from "./routes/entity";
 import {apiObject} from "./routes/object";
 
-// const bruteForce = new expressBrute();
+const bruteForce = new expressBrute({
+   freeRetries: 10
+});
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
