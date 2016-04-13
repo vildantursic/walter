@@ -3,6 +3,6 @@
 import {Schema} from "mongoose";
 
 export let schema: Schema = new Schema({
-        name: String,
-        address: String
+        address: String,
+        name: String
 });

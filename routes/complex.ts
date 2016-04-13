@@ -4,23 +4,41 @@ import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {complexModel} from "../models/models";
 
+let checkData: Function = (param: Object): Boolean => {
+    if (param) {
+        return true;
+    }
+    return false;
+};
+
 const api = router.route("/api/complex/:id*?");
 
 api.get((req: Request, res: Response) => {
 
-    let id: string = req.params.id;
-    complexModel.find({_id: id}, (err, data) => {
-        if (err) throw err;
+    let check = checkData(req.params.id);
+
+    complexModel.find(check, (err: Error, data: Array<Object>) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
+    // await complexModel.find({_id: id}).exec((err: Error, data) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     res.json(data);
+    // });
 });
 
 api.post((req: Request, res: Response) => {
 
-    let data = req.body;
+    let data: Object = req.body;
     let complex = new complexModel(data);
-    complex.save((err) => {
-        if (err) throw err;
+    complex.save((err: Error) => {
+        if (err) {
+            throw err;
+        }
         res.json("Document is saved");
     });
 });
@@ -28,8 +46,10 @@ api.post((req: Request, res: Response) => {
 api.put((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    complexModel.update({ _id: id }, { $set: req.body }, (err, data) => {
-        if (err) throw err;
+    complexModel.update({ _id: id }, { $set: req.body }, (err: Error, data: Array<Object>) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
 });
@@ -37,8 +57,10 @@ api.put((req: Request, res: Response) => {
 api.delete((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    complexModel.findByIdAndRemove(id, (err, data) => {
-        if (err) throw err;
+    complexModel.findByIdAndRemove(id, (err: Error, data: Array<Object>) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
 });

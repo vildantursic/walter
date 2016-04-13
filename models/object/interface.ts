@@ -3,20 +3,19 @@
 import {Document} from "mongoose";
 
 export interface IObject extends Document {
-    _id: string;
-    guid: string;
-    complex: String;
-    name: string;
     address: string;
-    location: Array<Object>;
-    entity: String;
-    model: string;
     category: string;
+    checkouts: Object;
+    complex: String;
+    entity: String;
+    geometry: Array<Object>;
+    guid: string;
     group: string;
     level: string;
-    space: string;
-    checkouts: Object;
-    projects: Array<Object>;
-    geometry: Array<Object>;
+    location: Array<Object>;
     material: Array<Object>;
+    model: string;
+    name: string;
+    projects: Array<Object>;
+    space: string;
 }

@@ -9,9 +9,10 @@ const api = router.route("/api/entity/:id*?");
 api.get((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    entityModel.find({_id: id}, (err, data) => {
-        if (err) throw err;
-
+    entityModel.find({_id: id}, (err: Error, data: Array<Object>) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
 });
@@ -21,7 +22,9 @@ api.post((req: Request, res: Response) => {
     let data = req.body;
     let complex = new entityModel(data);
     complex.save((err) => {
-        if (err) throw err;
+        if (err) {
+            throw err;
+        }
         res.json("Document is saved");
     });
 });
@@ -29,8 +32,10 @@ api.post((req: Request, res: Response) => {
 api.put((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    entityModel.update({ _id: id }, { $set: { name: req.body.name }}, (err, data) => {
-        if (err) throw err;
+    entityModel.update({ _id: id }, { $set: { name: req.body.name }}, (err: Error, data: Array<Object>) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
 });
@@ -38,8 +43,10 @@ api.put((req: Request, res: Response) => {
 api.delete((req: Request, res: Response) => {
 
     let id: string = req.params.id;
-    entityModel.findByIdAndRemove(id, (err, data) => {
-        if (err) throw err;
+    entityModel.findByIdAndRemove(id, (err: Error, data: Array<Object>) => {
+        if (err) {
+            throw err;
+        }
         res.json(data);
     });
 });

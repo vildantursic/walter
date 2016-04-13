@@ -1,4 +1,4 @@
-import {model, Model} from "mongoose";
+import {Model} from "mongoose";
 import {schema} from "./schema";
 import {IEntity} from "./interface.ts";
 import {conn} from "../../connections/connection";

@@ -3,13 +3,13 @@
 import {Schema} from "mongoose";
 
 export let schema: Schema = new Schema({
-    name: String,
     address: {
-        type: String,
-        required: true
+        required: true,
+        type: String
     },
     location: [{
         lat : String,
         lng : String
-    }]
+    }],
+    name: String
 });
