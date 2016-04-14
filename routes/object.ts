@@ -2,21 +2,22 @@
 
 import {Request, Response, Router} from "express";
 const router: Router = Router();
+import {IRoute} from "express-serve-static-core";
 import {objectModel} from "../models/models";
-import {checkData, checkIfDataIsArray} from "../functions/validation";
+import {checkObjectIDValidity, checkIfDataIsArray, errorIDValidationMessages, errorApiMessages} from "../helpers/validation";
 
-const api = router.route("/api/object/:id*?");
+const api: IRoute = router.route("/api/object/:id*?");
 
 api.get(async (req: Request, res: Response) => {
-    if (!checkData(req.params.id)) {
-        res.json("invalid object for search");
+    if (!checkObjectIDValidity(req.params.id)) {
+        res.status(400).json(errorIDValidationMessages.getMessage);
     } else {
         let obj: Object = await objectModel.find({_id: req.params.id})
             .populate("complex")
             .populate("entity")
             .exec()
             .catch((e: Error) => {
-                console.log(e);
+                res.status(500).send({ error: errorApiMessages.getMessage + e });
             });
 
         res.json(obj);
@@ -26,26 +27,29 @@ api.get(async (req: Request, res: Response) => {
 api.post(async (req: Request, res: Response) => {
 
     // check data before saving also could do validation within function
-    let obj: Array<Object> = checkIfDataIsArray(req.body);
+    let obj: Array<Object> = await checkIfDataIsArray(req.body);
 
-    objectModel.insertMany(obj, (err: Error, data: Object) => {
+    let dataRes: Object = await objectModel.insertMany(obj, (err: Error, data: Object) => {
         if (err) {
             throw err;
         }
-        res.json(data);
+        return data;
+    }).catch((e: Error) => {
+        res.status(500).send({ error: errorApiMessages.postMessage + e });
     });
+    res.json(dataRes);
 });
 
 api.put(async (req: Request, res: Response) => {
 
-    if (!checkData(req.params.id)) {
-        res.json("invalid object for update");
+    if (!checkObjectIDValidity(req.params.id)) {
+        res.json(errorIDValidationMessages.putMessage);
     } else {
         let obj: Object = await objectModel.
             update({ _id: req.params.id }, { $set: req.body })
             .exec()
             .catch((e: Error) => {
-                console.log(e);
+                res.status(500).send({ error: errorApiMessages.postMessage + e });
             });
         res.json(obj);
     }
@@ -53,14 +57,14 @@ api.put(async (req: Request, res: Response) => {
 
 api.delete(async (req: Request, res: Response) => {
 
-    if (!checkData(req.params.id)) {
-        res.json("invalid object for deletion");
+    if (!checkObjectIDValidity(req.params.id)) {
+        res.json(errorIDValidationMessages.deleteMessage);
     } else {
         let obj: Object = await objectModel
             .findByIdAndRemove(req.params.id)
             .exec()
             .catch((e: Error) => {
-                console.log(e);
+                res.status(500).send({ error: errorApiMessages.deleteMessage + e });
             });
         res.json(obj);
     }
