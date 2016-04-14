@@ -4,7 +4,8 @@ import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {IRoute} from "express-serve-static-core";
 import {objectModel} from "../models/models";
-import {checkObjectIDValidity, checkIfDataIsArray, errorIDValidationMessages, errorApiMessages} from "../helpers/validation";
+import {checkObjectIDValidity, checkIfDataIsArray} from "../helpers/validation";
+import {errorIDValidationMessages, errorApiMessages} from "../helpers/errorMessages";
 
 const api: IRoute = router.route("/api/object/:id*?");
 
