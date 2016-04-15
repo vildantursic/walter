@@ -3,10 +3,10 @@
 import * as express from "express";
 const app: express.Application = express();
 import {urlencoded, json} from "body-parser";
-import {readFileSync} from "fs";
 import {Server} from "http";
 import * as ExpressBrute from "express-brute";
 import * as expressJWT from "express-jwt";
+import {key} from "./helpers/key";
 // make it better
 import ExpressBruteMiddleware = require("express-brute");
 import MemoryStoreOptions = require("express-brute");
@@ -27,7 +27,6 @@ let bruteForce: ExpressBruteMiddleware = new ExpressBrute(store, {
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
-let key: string = readFileSync("./helpers/key.ts").toString();
 app.use(expressJWT({ secret: key}).unless({path: ["/token"]}));
 app.use("/", bruteForce.prevent, token);
 app.use("/", bruteForce.prevent, refreshToken);

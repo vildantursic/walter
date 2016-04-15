@@ -27,13 +27,8 @@ api.post(async (req: Request, res: Response) => {
     // check data before saving also could do validation within function
     let obj: Array<Object> = checkIfDataIsArray(req.body);
 
-    let dataRes: Object = await complexModel.insertMany(obj, (err: Error, data: Object) => {
-        if (err) {
-            throw err;
-        }
+    let dataRes: Object = await complexModel.insertMany(obj).then((data: Object) => {
         return data;
-    }).catch((e: Error) => {
-        res.status(400).send({ error: errorApiMessages.postMessage + e });
     });
     res.status(200).json(dataRes);
 });

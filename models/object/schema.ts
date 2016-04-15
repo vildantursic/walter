@@ -28,3 +28,4 @@ export let schema: Schema = new Schema({
     model: String,
     space: String
 });
+

@@ -17,7 +17,7 @@ api.post(async (req: Request, res: Response) => {
     // if (!valid) return res.send(401); // re-logging
 
     // issue a new token
-    let refreshedToken: string = jwt.sign(profile, key, { expiresIn: "10m" });
+    let refreshedToken: string = jwt.sign(profile, key, { expiresIn: "40m" });
     res.json({ token: refreshedToken });
 });
 
