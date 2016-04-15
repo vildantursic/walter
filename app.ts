@@ -13,9 +13,11 @@ import {token} from "./routes/token";
 import {apiComplex} from "./routes/complex";
 import {apiEntity} from "./routes/entity";
 import {apiObject} from "./routes/object";
+import MemoryStoreOptions = require("express-brute");
+import ExpressBruteMiddleware = require("express-brute");
 
-let store = new ExpressBrute.MemoryStore();
-let bruteForce = new ExpressBrute(store, {
+let store: MemoryStoreOptions = new ExpressBrute.MemoryStore();
+let bruteForce: ExpressBruteMiddleware = new ExpressBrute(store, {
    freeRetries: 20,
    minWait: 60 * 1000
 });

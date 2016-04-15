@@ -10,7 +10,7 @@ const api: IRoute = router.route("/token");
 api.post(async (req: Request, res: Response) => {
 
     if (req.body.username === "walter") {
-        let token: string = await jwt.sign({ username: req.body.username }, "walter-secret");
+        let token: string = await jwt.sign({ username: req.body.username }, "walter-secret", {expiresInMinutes: 60});
         res.status(200).json(token);
     } else {
         res.status(401).json("Login Failed!");
