@@ -1,5 +1,6 @@
 import * as mongoose from "mongoose";
 import {Connection} from "mongoose";
+import {Options} from "typings/dist/bin-uninstall";
 
 let options = {
     pass: "K6akD4IzZM9a",

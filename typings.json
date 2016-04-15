@@ -5,6 +5,7 @@
     "express-brute": "registry:dt/express-brute#0.0.0+20160317120654",
     "express-jwt": "registry:dt/express-jwt#0.0.0+20160319033732",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
+    "jsonwebtoken": "registry:dt/jsonwebtoken#5.7.0+20160227192404",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mongoose": "registry:dt/mongoose#3.8.5+20160316155526",
     "node": "registry:dt/node#4.0.0+20160330064709",

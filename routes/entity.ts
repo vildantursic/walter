@@ -19,7 +19,7 @@ api.get(async (req: Request, res: Response) => {
             .catch((e: Error) => {
                 res.status(500).send({ error: errorApiMessages.getMessage + e });
             });
-        res.json(obj);
+        res.status(200).json(obj);
     }
 });
 
@@ -36,7 +36,7 @@ api.post(async (req: Request, res: Response) => {
     }).catch((e: Error) => {
         res.status(500).send({ error: errorApiMessages.postMessage + e });
     });
-    res.json(dataRes);
+    res.status(200).json(dataRes);
 });
 
 api.put(async (req: Request, res: Response) => {
@@ -50,7 +50,7 @@ api.put(async (req: Request, res: Response) => {
             .catch((e: Error) => {
                 res.status(500).send({ error: errorApiMessages.putMessage + e });
             });
-        res.json(obj);
+        res.status(200).json(obj);
     }
 });
 
@@ -65,7 +65,7 @@ api.delete(async (req: Request, res: Response) => {
             .catch((e: Error) => {
                 res.status(500).send({ error: errorApiMessages.deleteMessage + e });
             });
-        res.json(obj);
+        res.status(200).json(obj);
     }
 });
 
