@@ -13,7 +13,7 @@ api.post(async (req: Request, res: Response) => {
         let token: string = await jwt.sign({ username: req.body.username }, "walter-secret");
         res.status(200).json(token);
     } else {
-        res.status(400).json("Login Failed!");
+        res.status(401).json("Login Failed!");
     }
 });
 
