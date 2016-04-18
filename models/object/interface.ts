@@ -1,6 +1,6 @@
 /// <reference path="../../typings/main.d.ts" />
 
-import {Document} from "mongoose";
+import {Document, Model} from "mongoose";
 
 export interface IObject extends Document {
     address: string;
@@ -18,4 +18,9 @@ export interface IObject extends Document {
     name: string;
     projects: Array<Object>;
     space: string;
+}
+
+export interface IObjectModel extends Model<IObject> {
+    bulkInsert(): Function;
+    insertMany(): Function;
 }

@@ -4,6 +4,7 @@ let checkObjectIDValidity: Function = (param: string): Boolean => {
     return (re.test(param));
 };
 let checkIfDataIsArray: Function = (data: Array<Object>): Array<Object> => {
+
     if (Array.isArray(data)) {
         return data;
     } else {

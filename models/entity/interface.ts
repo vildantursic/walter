@@ -9,4 +9,5 @@ export interface IEntity extends Document {
 
 export interface IEntityModel extends Model<IEntity> {
     bulkInsert(): Function;
+    InsertMany(): Function;
 }

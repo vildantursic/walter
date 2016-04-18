@@ -13,18 +13,10 @@ const api: IRoute = router.route("/token");
 
 api.post(async (req: Request, res: Response) => {
 
-    if (!checkObjectIDValidity(req.body.id)) {
-        res.status(400).json(errorIDValidationMessages.getMessage);
-    }
     let obj: Object = await userModel
-        .find({_id: req.body.id})
+        .find({username: req.body.username})
         .lean()
-        .exec()
-        .catch((e: Error) => {
-            res.status(400).send({ error: errorApiMessages.getMessage + e });
-        });
-
-    console.log(obj);
+        .exec();
 
     if (req.body.username === obj[0].username) {
         let token: string = jwt.sign({ username: req.body.username }, key, { expiresIn: "40m" });

@@ -4,13 +4,12 @@ import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {IRoute} from "express-serve-static-core";
 import * as jwt from "jsonwebtoken";
-import {readFileSync} from "fs";
+import {key} from "../helpers/key";
 
 const api: IRoute = router.route("/refresh");
 
 api.post(async (req: Request, res: Response) => {
     // verify the existing token
-    let key: string = readFileSync("./helpers/key.ts").toString();
     let profile: string = jwt.verify(req.body.token, key);
 
     // check if the user still exists or if authorization hasn't been revoked

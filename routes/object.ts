@@ -18,7 +18,7 @@ api.get(async (req: Request, res: Response) => {
         .populate("entity")
         .lean()
         .exec()
-        .catch((e: Error) => {
+        .error((e: Error) => {
             res.status(400).send({ error: errorApiMessages.getMessage + e });
         });
 
@@ -43,7 +43,7 @@ api.put(async (req: Request, res: Response) => {
         update({ _id: req.params.id }, { $set: req.body })
         .lean()
         .exec()
-        .catch((e: Error) => {
+        .error((e: Error) => {
             res.status(400).send({ error: errorApiMessages.postMessage + e });
         });
     res.status(200).json(obj);
@@ -58,7 +58,7 @@ api.delete(async (req: Request, res: Response) => {
         .findByIdAndRemove(req.params.id)
         .lean()
         .exec()
-        .catch((e: Error) => {
+        .error((e: Error) => {
             res.status(400).send({ error: errorApiMessages.deleteMessage + e });
         });
     res.status(200).json(obj);
