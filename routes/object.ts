@@ -16,6 +16,7 @@ api.get(async (req: Request, res: Response) => {
     let obj: Object = await objectModel.find({_id: req.params.id})
         .populate("complex")
         .populate("entity")
+        .lean()
         .exec()
         .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.getMessage + e });
@@ -29,9 +30,7 @@ api.post(async (req: Request, res: Response) => {
     // check data before saving also could do validation within function
     let obj: Array<Object> = checkIfDataIsArray(req.body);
 
-    let dataRes: Object = await objectModel.insertMany(obj).then((data: Object) => {
-        return data;
-    });
+    let dataRes: Object = await objectModel.insertMany(obj);
     res.status(200).json(dataRes);
 });
 
@@ -42,6 +41,7 @@ api.put(async (req: Request, res: Response) => {
     }
     let obj: Object = await objectModel.
         update({ _id: req.params.id }, { $set: req.body })
+        .lean()
         .exec()
         .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.postMessage + e });
@@ -56,6 +56,7 @@ api.delete(async (req: Request, res: Response) => {
     }
     let obj: Object = await objectModel
         .findByIdAndRemove(req.params.id)
+        .lean()
         .exec()
         .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.deleteMessage + e });

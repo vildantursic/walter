@@ -18,10 +18,13 @@ api.post(async (req: Request, res: Response) => {
     }
     let obj: Object = await userModel
         .find({_id: req.body.id})
+        .lean()
         .exec()
         .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.getMessage + e });
         });
+
+    console.log(obj);
 
     if (req.body.username === obj[0].username) {
         let token: string = jwt.sign({ username: req.body.username }, key, { expiresIn: "40m" });

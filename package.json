@@ -4,7 +4,7 @@
   "description": "express with typescript",
   "main": "index.js",
   "scripts": {
-    "start": "npm run nmon && npm run tsc:w",
+    "start": "npm run tsc:w && npm run nmon",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "nmon": "nodemon build/app.js",
@@ -24,6 +24,7 @@
     "express": "^4.13.4",
     "express-brute": "^0.6.0",
     "express-jwt": "^3.3.0",
+    "express-unless": "^0.3.0",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.12",
     "nodemon": "^1.9.1"
