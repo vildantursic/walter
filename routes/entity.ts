@@ -14,35 +14,15 @@ api.get(async (req: Request, res: Response) => {
     // if (!checkObjectIDValidity(req.params.id)) {
     //     res.status(400).json(errorIDValidationMessages.getMessage);
     // }
-    // let obj: Object = await entityModel
-    //     .find({_id: req.params.id})
-    //     .lean()
-    //     .exec()
-    //     .error((e: Error) => {
-    //         return e;
-    //         // res.status(400).send({ error: errorApiMessages.putMessage + e });
-    //     });
-    // res.status(200).json(obj);
-    let stream: Stream = await entityModel
+    let obj: Object = await entityModel
         .find({})
-        .stream({ transform: JSON.stringify });
-    // .lean()
-    // .exec()
-    // .error((e: Error) => {
-    //     res.status(400).send({ error: errorApiMessages.getMessage + e });
-    // });
-
-    stream.on("data", (doc: Object) => {
-        // res.json(doc);
-        res.write(doc, "ascii");
-
-    }).on("error", (err: Error) => {
-        console.log(err);
-    }).on("close", () => {
-        // console.log("Closed");
-        res.end("Done");
-
-    });
+        .lean()
+        .exec()
+        .catch((e: Error) => {
+            return e;
+            // res.status(400).send({ error: errorApiMessages.putMessage + e });
+        });
+    res.status(200).json(obj);
 });
 
 api.post(async (req: Request, res: Response) => {

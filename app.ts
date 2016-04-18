@@ -13,6 +13,7 @@ import {token} from "./routes/token";
 import {refreshToken} from "./routes/refresh-token";
 import {apiComplex} from "./routes/complex";
 import {apiEntity} from "./routes/entity";
+import {apiEntityStream} from "./routes/entity-stream";
 import {apiObject} from "./routes/object";
 
 let store: ExpressBrute.MemoryStore = new ExpressBrute.MemoryStore();
@@ -29,6 +30,7 @@ app.use("/", bruteForce.prevent, token);
 app.use("/", bruteForce.prevent, refreshToken);
 app.use("/", bruteForce.prevent, apiComplex);
 app.use("/", bruteForce.prevent, apiEntity);
+app.use("/", bruteForce.prevent, apiEntityStream);
 app.use("/", bruteForce.prevent, apiObject);
 
 const server: Server = app.listen(4000, "localhost", () => {
