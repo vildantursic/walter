@@ -7,22 +7,18 @@ import {objectModel} from "../models/models";
 import {checkObjectIDValidity, checkIfDataIsArray} from "../helpers/validation";
 import {errorIDValidationMessages, errorApiMessages} from "../helpers/errorMessages";
 
-const api: IRoute = router.route("/api/object/:id*?");
+const api: IRoute = router.route("/api/object/:id");
 
 api.get(async (req: Request, res: Response) => {
-    if (!checkObjectIDValidity(req.params.id)) {
+    let id: string = req.params.id;
+    if (!checkObjectIDValidity(id)) {
         res.status(400).json(errorIDValidationMessages.getMessage);
     }
-    let obj: Object = await objectModel.find({_id: req.params.id})
-        .populate("complex")
-        .populate("entity")
-        .lean()
-        .exec()
-        .error((e: Error) => {
-            res.status(400).send({ error: errorApiMessages.getMessage + e });
-        });
+    let obj: Object = await objectModel
+        .find({_id: id})
+        .exec();
 
-    res.status(200).json(obj);
+    res.json(obj);
 });
 
 api.post(async (req: Request, res: Response) => {
@@ -43,7 +39,7 @@ api.put(async (req: Request, res: Response) => {
         update({ _id: req.params.id }, { $set: req.body })
         .lean()
         .exec()
-        .error((e: Error) => {
+        .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.postMessage + e });
         });
     res.status(200).json(obj);
@@ -58,7 +54,7 @@ api.delete(async (req: Request, res: Response) => {
         .findByIdAndRemove(req.params.id)
         .lean()
         .exec()
-        .error((e: Error) => {
+        .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.deleteMessage + e });
         });
     res.status(200).json(obj);

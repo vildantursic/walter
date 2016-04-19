@@ -13,13 +13,16 @@ const api: IRoute = router.route("/token");
 
 api.post(async (req: Request, res: Response) => {
 
+    let username: string = req.query.username;
+    console.log(username);
+
     let obj: Object = await userModel
-        .find({username: req.body.username})
+        .find({username: username})
         .lean()
         .exec();
 
-    if (req.body.username === obj[0].username) {
-        let token: string = jwt.sign({ username: req.body.username }, key, { expiresIn: "40m" });
+    if (username === obj[0].username) {
+        let token: string = jwt.sign({ username: username }, key, { expiresIn: "2h" });
         res.status(200).json({ token: token });
     } else {
         res.status(401).json("Login Failed!");

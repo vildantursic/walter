@@ -6,23 +6,22 @@ import {IRoute} from "express-serve-static-core";
 import {entityModel} from "../models/models";
 import {checkObjectIDValidity, checkIfDataIsArray} from "../helpers/validation";
 import {errorIDValidationMessages, errorApiMessages} from "../helpers/errorMessages";
-import {Stream} from "stream";
 
-const api: IRoute = router.route("/api/entity/:id*?");
+const api: IRoute = router.route("/api/entity/:id");
 
 api.get(async (req: Request, res: Response) => {
-    // if (!checkObjectIDValidity(req.params.id)) {
-    //     res.status(400).json(errorIDValidationMessages.getMessage);
-    // }
+    let id: string = req.params.id;
+    if (!checkObjectIDValidity(id)) {
+        res.status(400).json(errorIDValidationMessages.getMessage);
+    }
     let obj: Object = await entityModel
-        .find({})
-        .lean()
+        .find({_id: id})
         .exec()
         .catch((e: Error) => {
-            return e;
-            // res.status(400).send({ error: errorApiMessages.putMessage + e });
+            res.status(400).send({ error: errorApiMessages.postMessage + e });
         });
-    res.status(200).json(obj);
+
+    res.json(obj);
 });
 
 api.post(async (req: Request, res: Response) => {
@@ -43,7 +42,7 @@ api.put(async (req: Request, res: Response) => {
         .update({ _id: req.params.id }, { $set: req.body })
         .lean()
         .exec()
-        .error((e: Error) => {
+        .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.putMessage + e });
         });
     res.status(200).json(obj);
@@ -58,7 +57,7 @@ api.delete(async (req: Request, res: Response) => {
         .findByIdAndRemove(req.params.id)
         .lean()
         .exec()
-        .error((e: Error) => {
+        .catch((e: Error) => {
             res.status(400).send({ error: errorApiMessages.deleteMessage + e });
         });
     res.status(200).json(obj);
