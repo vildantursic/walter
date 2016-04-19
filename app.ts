@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
    next();
 });
 
-app.use(expressJWT({ secret: key}).unless({path: ["/token"]}));
+// app.use(expressJWT({ secret: key}).unless({path: ["/token"]}));
 // token
 app.use("/", bruteForce.prevent, token);
 app.use("/", bruteForce.prevent, refreshToken);

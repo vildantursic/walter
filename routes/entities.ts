@@ -9,8 +9,9 @@ import {socketIO} from "../app";
 
 const api: IRoute = router.route("/api/entity");
 
-socketIO.on("connection", function (socket: SocketIO.Socket) {
-    socket.emit("entity", { entity: "data" });
+let entities = socketIO.of("/entities");
+
+let entity = entities.on("connection", function (socket: SocketIO.Socket) {
 });
 
 api.get(async (req: Request, res: Response) => {
@@ -19,7 +20,8 @@ api.get(async (req: Request, res: Response) => {
         .stream({ transform: JSON.stringify });
 
     stream.on("data", (doc: Object) => {
-        res.write(doc, "ascii");
+        // res.write(doc, "ascii");
+        entity.emit("entity", doc);
     }).on("error", (err: Error) => {
         console.log(err);
     }).on("close", () => {
