@@ -13,14 +13,7 @@ export class DashboardComponent implements OnInit {
 
   objects: Walter[] = [];
 
-  constructor(private _router: Router,
-              private _objectService: ObjectService) {
-                let socket = io("http://localhost:4000/entities");
-                socket.on("entity", (data) => {
-                  console.log(data);
-                  this.objects = data;
-                });
-              }
+  constructor(private _router: Router, private _objectService: ObjectService) {}
 
   ngOnInit() {
     this.getTopObjects();
@@ -28,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   getTopObjects() {
     this._objectService.getObjects()
-                  .map(objects => this.objects = objects.slice(1, 5))
+                  .map((objects: any) => this.objects = objects.slice(1, 5))
                   .subscribe(
                       objects => this.objects = objects,
                     error =>  console.log("Error white calling objects"));

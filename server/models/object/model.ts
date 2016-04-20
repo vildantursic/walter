@@ -1,6 +1,5 @@
-import {Model} from "mongoose";
 import {schema} from "./schema";
-import {IObject} from "./interface.ts";
+import {IObject, IObjectModel} from "./interface.ts";
 import {conn} from "../../connections/connection";
 
-export const objectModel: Model<IObject> = conn.model<IObject> ("Object", schema);
+export const objectModel: IObjectModel = <IObjectModel>conn.model<IObject> ("Object", schema);

@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from "angular2/core";
 import {RouteParams} from "angular2/router";
-import {Http, Response, Headers, RequestOptions} from "angular2/http";
-import {Observable} from "rxjs/Rx";
 
 import {Walter} from "./object";
 import {ObjectService} from "./object.service";

@@ -1,6 +1,6 @@
 import {Model} from "mongoose";
 import {schema} from "./schema";
-import {IComplex} from "./interface.ts";
+import {IComplex, IComplexModel} from "./interface.ts";
 import {conn} from "../../connections/connection";
 
-export const complexModel: Model<IComplex> = conn.model<IComplex> ("Complex", schema);
+export const complexModel: IComplexModel = <IComplexModel>conn.model<IComplex> ("Complex", schema);

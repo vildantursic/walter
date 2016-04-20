@@ -1,5 +1,3 @@
-/// <reference path="../typings/main.d.ts" />
-
 import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {IRoute} from "express-serve-static-core";

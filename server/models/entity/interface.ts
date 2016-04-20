@@ -1,5 +1,3 @@
-/// <reference path="../../typings/main.d.ts" />
-
 import {Document, Model} from "mongoose";
 
 export interface IEntity extends Document {
@@ -9,5 +7,5 @@ export interface IEntity extends Document {
 
 export interface IEntityModel extends Model<IEntity> {
     bulkInsert(): Function;
-    InsertMany(): Function;
+    insertMany(obj?: Array<any>): Function;
 }

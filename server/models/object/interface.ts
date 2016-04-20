@@ -1,5 +1,3 @@
-/// <reference path="../../typings/main.d.ts" />
-
 import {Document, Model} from "mongoose";
 
 export interface IObject extends Document {
@@ -12,7 +10,6 @@ export interface IObject extends Document {
     guid: string;
     group: string;
     level: string;
-    location: Array<Object>;
     material: Array<Object>;
     model: string;
     name: string;
@@ -22,5 +19,5 @@ export interface IObject extends Document {
 
 export interface IObjectModel extends Model<IObject> {
     bulkInsert(): Function;
-    insertMany(): Function;
+    insertMany(obj?: Array<any>): Function;
 }

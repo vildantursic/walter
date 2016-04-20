@@ -1,16 +1,9 @@
-/// <reference path="typings/main.d.ts" />
-
+/// <reference path="../typings/main.d.ts" />
 import * as express from "express";
 const app: express.Application = express();
 import {urlencoded, json} from "body-parser";
-import * as http from "http";
-import * as expressJWT from "express-jwt";
-import {key} from "./helpers/key";
 import * as io from "socket.io";
 import {bruteForce} from "./helpers/bruteForce";
-
-let server: http.Server = http.Server(app);
-export let socketIO: SocketIO.Server = io.listen(server);
 
 // importing routes
 // token
@@ -51,9 +44,12 @@ app.use("/", bruteForce.prevent, apiEntities);
 app.use("/", bruteForce.prevent, apiObject);
 app.use("/", bruteForce.prevent, apiObjects);
 // client app
-app.use(express.static("../../client"));
+app.use(express.static(__dirname + "/../client"));
 
-server.listen(4000, "localhost", () => {
+const server = app.listen(4000, "localhost", () => {
    const port: number = server.address().port;
+   console.log(__dirname);
    console.log("Listening on http://localhost:" + port);
 });
+
+export let socketIO: SocketIO.Server = io.listen(server);
