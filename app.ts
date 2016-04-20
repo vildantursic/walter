@@ -56,6 +56,9 @@ app.use("/", bruteForce.prevent, apiEntities);
 // object
 app.use("/", bruteForce.prevent, apiObject);
 app.use("/", bruteForce.prevent, apiObjects);
+// client app
+app.use(express.static("./client"));
+app.use(express.static("./client/node_modules"));
 
 server.listen(4000, "localhost", () => {
    const port: number = server.address().port;

@@ -1,68 +1,41 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title></title>
-</head>
-<body ng-app="app">
+  <head>
+    <base href="/">
+    
+    <title>Walter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/styles.css">
 
-<div ng-controller="mainCtrl">
-  <ul>
-    <!-- <li ng-repeat="com in complex">{{com.name}}</li> -->
-  </ul>
-  <!-- {{complex}} -->
-  {{entity}}
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="./node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="./node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="./node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
 
-</div>
+    <!--<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>-->
+    <script src="./node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="./node_modules/systemjs/dist/system.src.js"></script>
+    <script src="./node_modules/angular2/bundles/http.js"></script>
+    <script src="./node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="./node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="./node_modules/angular2/bundles/router.dev.js"></script>
 
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script>
-  var app = angular.module("app", []);
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        packages: {
+          dist: {
+            format: "register",
+            defaultExtension: "js"
+          }
+        }
+      });
+      System.import("dist/main")
+      .then(null, console.error.bind(console));
+    </script>
 
-  app.controller("mainCtrl", function($scope, $http) {
-
-    $scope.complex = [];
-    $scope.entity = [];
-
-    var req = {
-      method: "GET",
-      url: "http://localhost:4000/api/complex"
-    }
-    var req1 = {
-      method: "GET",
-      url: "http://localhost:4000/api/entity"
-    }
-
-    $http(req).then(function(data){
-      // console.log(data);
-    }, function(err){
-      console.log(err);
-    });
-    $http(req1).then(function(data){
-      // console.log(data);
-    }, function(err){
-      console.log(err);
-    });
-
-    var socket = io.connect('http://localhost:4000/');
-    socket.on('entity', function (data) {
-      console.log(data);
-    });
-    socket.on('complex', function (data) {
-      // console.log(data);
-      $scope.complex.push(data);
-    });
-
-    var socket1 = io.connect('http://localhost:4000/entities');
-    socket1.on('entity', function (data) {
-      console.log(data);
-      $scope.entity.push(data);
-      $scope.$apply();
-    });
-
-  })
-
-</script>
-</body>
+  </head>
+  <body>
+    <app>Loading...</app>
+  </body>
 </html>

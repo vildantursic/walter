@@ -21,7 +21,7 @@ api.get(async (req: Request, res: Response) => {
 
     stream.on("data", (doc: Object) => {
         // res.write(doc, "ascii");
-        entity.emit("entity", doc);
+        entity.emit("entity", JSON.parse(doc));
     }).on("error", (err: Error) => {
         console.log(err);
     }).on("close", () => {
