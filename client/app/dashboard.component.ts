@@ -1,10 +1,20 @@
-import { Component, OnInit } from "angular2/core";
+import {Component, OnInit, Pipe} from "angular2/core";
 import { Router } from "angular2/router";
 import { Walter } from "./object";
 import { ObjectService } from "./object.service";
 
+@Pipe({name: 'data'})
+class Data {
+  transform(v: any, args: any[]) {
+    console.log(v);
+    console.log(typeof v);
+    return v;
+  }
+}
+
 @Component({
   selector: "dashboard",
+  pipes: [Data],
   templateUrl: "views/dashboard-component.html",
   styleUrls: ["styles/dashboard.component.css"]
 })
