@@ -9,10 +9,15 @@ const api: IRoute = router.route("/api/entity");
 api.get(async (req: Request, res: Response) => {
     let stream: Stream = await entityModel
         .find({})
+        .limit(1)
+        .select({_id: 0, name: 1})
+        .lean(true)
         .stream({ transform: JSON.stringify });
 
+    res.type('application/json');
+
     stream.on("data", (doc: string) => {
-        res.write(doc, "ascii");
+        res.write(doc);
     }).on("error", (err: Error) => {
         console.log(err);
     }).on("close", () => {

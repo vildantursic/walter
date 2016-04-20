@@ -6,9 +6,13 @@ import { ObjectService } from "./object.service";
 @Pipe({name: 'data'})
 class Data {
   transform(v: any, args: any[]) {
-    console.log(v);
-    console.log(typeof v);
-    return v;
+
+    if(v !== null && v.hasOwnProperty("_body")) {
+      console.log(JSON.parse(v._body));
+      return JSON.parse(v._body);
+    } else {
+      return v;
+    }
   }
 }
 

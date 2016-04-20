@@ -11,7 +11,6 @@ export class ObjectService {
 
   getObjects () {
     return this.http.get(this._objectsUrl + "entity")
-                  .map((res: Response) => res.toString())
                   .catch(this.handleError);
   }
 
