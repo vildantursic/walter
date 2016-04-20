@@ -4,6 +4,7 @@
     "module": "system",
     "moduleResolution": "node",
     "sourceMap": true,
+    "sourceRoot": "./client",
     "outDir": "dist",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

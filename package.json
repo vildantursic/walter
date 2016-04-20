@@ -4,10 +4,11 @@
   "description": "express with typescript",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run nmon\" \"npm run tsc:w\" ",
+    "start": "concurrently \"npm run tsc:w\" \"npm run tsc-client:w\" \"npm run nmon\" ",
     "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "nmon": "node build/app.js",
+    "tsc:w": "tsc -w -p ./server",
+    "tsc-client:w": "tsc -w -p ./client",
+    "nmon": "node server/build/app.js",
     "typings": "typings",
     "postinstall": "typings install"
   },
@@ -29,7 +30,14 @@
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.12",
     "nodemon": "^1.9.1",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "angular2": "2.0.0-beta.12",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "socket.io-client": "^1.4.5",
+    "systemjs": "0.19.24",
+    "zone.js": "0.6.6"
   },
   "devDependencies": {
     "chai": "^3.5.0",

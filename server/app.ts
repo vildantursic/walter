@@ -4,15 +4,15 @@ import * as express from "express";
 const app: express.Application = express();
 import {urlencoded, json} from "body-parser";
 import * as http from "http";
-import * as ExpressBrute from "express-brute";
 import * as expressJWT from "express-jwt";
 import {key} from "./helpers/key";
 import * as io from "socket.io";
+import {bruteForce} from "./helpers/bruteForce";
 
 let server: http.Server = http.Server(app);
 export let socketIO: SocketIO.Server = io.listen(server);
 
-// importing API
+// importing routes
 // token
 import {token} from "./routes/token";
 import {refreshToken} from "./routes/refresh-token";
@@ -25,12 +25,6 @@ import {apiEntities} from "./routes/entities";
 // object
 import {apiObject} from "./routes/object";
 import {apiObjects} from "./routes/objects";
-
-let store: ExpressBrute.MemoryStore = new ExpressBrute.MemoryStore();
-let bruteForce: ExpressBrute = new ExpressBrute(store, {
-   freeRetries: 2000,
-   minWait: 60 * 1000
-});
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
@@ -57,12 +51,9 @@ app.use("/", bruteForce.prevent, apiEntities);
 app.use("/", bruteForce.prevent, apiObject);
 app.use("/", bruteForce.prevent, apiObjects);
 // client app
-app.use(express.static("./client"));
-app.use(express.static("./client/node_modules"));
+app.use(express.static("../../client"));
 
 server.listen(4000, "localhost", () => {
    const port: number = server.address().port;
    console.log("Listening on http://localhost:" + port);
 });
-
-socketIO.emit("day", {a: "A"});
