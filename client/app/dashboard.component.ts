@@ -2,7 +2,7 @@ import { Component, OnInit } from "angular2/core";
 import { Router } from "angular2/router";
 
 import { Walter } from "./object";
-import { ObjectService } from "./object.service.ts";
+import { ObjectService } from "./object.service";
 
 @Component({
   selector: "dashboard",

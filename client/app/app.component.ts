@@ -1,10 +1,10 @@
 import {Component} from "angular2/core";
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "angular2/router";
 
-import {ObjectService} from "./object.service.ts";
-import {ObjectsComponent} from "./objects.component.ts";
+import {ObjectService} from "./object.service";
+import {ObjectsComponent} from "./objects.component";
 import {DashboardComponent} from "./dashboard.component";
-import { ObjectDetailComponent } from "./object-detail.component.ts";
+import { ObjectDetailComponent } from "./object-detail.component";
 
 @Component({
   selector: "app",

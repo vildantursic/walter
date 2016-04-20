@@ -1,10 +1,10 @@
 import {Component, OnInit} from "angular2/core";
 import {Router} from "angular2/router";
-import * as io from "socket.io-client";
+// import * as io from "socket.io-client";
 
 import {Walter} from "./object";
-import {ObjectDetailComponent} from "./object-detail.component.ts";
-import {ObjectService} from "./object.service.ts";
+import {ObjectDetailComponent} from "./object-detail.component";
+import {ObjectService} from "./object.service";
 
 @Component({
   directives: [ObjectDetailComponent],
