@@ -6,8 +6,8 @@ import {ObjectService} from "./object.service";
 
 @Component({
   selector: "hero-detail",
-  templateUrl: "../views/object-detail-component.html",
-  styleUrls: ["../styles/object-detail.component.css"]
+  templateUrl: "views/object-detail-component.html",
+  styleUrls: ["styles/object-detail.component.css"]
 })
 
 export class ObjectDetailComponent implements OnInit {

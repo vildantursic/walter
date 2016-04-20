@@ -10,39 +10,15 @@ import {ObjectService} from "./object.service";
 @Component({
   directives: [ObjectDetailComponent],
   selector: "objects",
-  styleUrls: ["../styles/objects.component.css"],
-  templateUrl: "../views/objects-component.html"
+  styleUrls: ["styles/objects.component.css"],
+  templateUrl: "views/objects-component.html"
 })
 export class ObjectsComponent implements OnInit {
 
   public selectedObject: Walter;
   public objects: any;
 
-  constructor(
-    private _router: Router,
-    private _objectService: ObjectService) {
-    // let socket = io("http://localhost:4000/entities");
-    // socket.on("entity", (data) => {
-    //   console.log(data);
-    //   this.objects = data;
-    // });
-  }
-
-  loadObjectsInStream () {
-    let socket = io("http://localhost:4000/entities");
-    let objects: any;
-
-    let socketMessageStream = Observable.create(observer => {
-      socket.on("entity", (data: Object) => {
-        console.log(data);
-        observer.onNext(data);
-      });
-    });
-
-    socketMessageStream.subscribe((data: Object) => {
-      objects.push(data);
-    });
-  };
+  constructor(private _router: Router, private _objectService: ObjectService) {}
 
   onSelect(object: Walter) { this.selectedObject = object; }
 
@@ -50,7 +26,8 @@ export class ObjectsComponent implements OnInit {
     this._objectService.getObjects()
                    .subscribe(
                        objects => this.objects = objects,
-                     error =>  console.log("Error white calling objects"));
+                        error =>  console.log("Error white calling objects")
+                   );
   }
 
   ngOnInit() {

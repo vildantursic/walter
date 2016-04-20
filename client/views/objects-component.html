@@ -1,8 +1,11 @@
 <h2>My Objects</h2>
 <ul class="heroes">
+  {{objects|async|json}}
+  <!--
   <li *ngFor="#object of objects" (click)="onSelect(object)" [class.selected]="object === selectedObject">
     <span class="badge">{{object.id}}</span> {{object.name}}
   </li>
+  -->
 </ul>
 <div *ngIf="selectedObject">
   <h2>

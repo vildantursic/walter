@@ -11,18 +11,9 @@ export class ObjectService {
 
   getObjects () {
     return this.http.get(this._objectsUrl + "entity")
-    .map((res: Response) => res)
-    .do((data: Object ) => console.log(data))
-    .catch(this.handleError);
+                  .map((res: Response) => res.toString())
+                  .catch(this.handleError);
   }
-  //////////////////////////
-
-  // getHero(id: number) {
-  //   return this.http.get("http://localhost:4000/api/hero/" + id)
-  //   .map(res => res.json())
-  //   .subscribe(object => console.log(object));
-  // }
-  //////////////////////////
 
   private handleError (error: Response) {
     console.error(error);

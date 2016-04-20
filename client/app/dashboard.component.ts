@@ -1,6 +1,5 @@
 import { Component, OnInit } from "angular2/core";
 import { Router } from "angular2/router";
-
 import { Walter } from "./object";
 import { ObjectService } from "./object.service";
 
@@ -11,7 +10,7 @@ import { ObjectService } from "./object.service";
 })
 export class DashboardComponent implements OnInit {
 
-  objects: Walter[] = [];
+  objects: any;
 
   constructor(private _router: Router, private _objectService: ObjectService) {}
 
@@ -20,11 +19,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getTopObjects() {
-    this._objectService.getObjects()
-                  .map((objects: any) => this.objects = objects.slice(1, 5))
-                  .subscribe(
-                      objects => this.objects = objects,
-                    error =>  console.log("Error white calling objects"));
+    this.objects = this._objectService.getObjects();
   }
 
   gotoDetail(object: Walter) {

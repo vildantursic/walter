@@ -1,8 +1,11 @@
 <h3>Top Heroes</h3>
 <div class="grid grid-pad">
-  <div *ngFor="#object of objects" (click)="gotoDetail(object)" class="col-1-4">
+  {{objects | async | json}}
+  <!--
+  <div *ngFor="#object of objects | async" (click)="gotoDetail(object)" class="col-1-4">
     <div class="module object">
       <h4>{{object.name}}</h4>
     </div>
   </div>
+  -->
 </div>

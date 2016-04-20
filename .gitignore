@@ -1,7 +1,7 @@
 node_modules
-build
-*.js
-*.txt
 .idea
-dist
 npm-debug.log
+server/**/*.js
+server/**/*.js.map
+client/app/**/*.js
+client/app/**/*.js.map

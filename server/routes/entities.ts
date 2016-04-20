@@ -12,11 +12,11 @@ api.get(async (req: Request, res: Response) => {
         .stream({ transform: JSON.stringify });
 
     stream.on("data", (doc: string) => {
-        // res.write(doc, "ascii");
+        res.write(doc, "ascii");
     }).on("error", (err: Error) => {
         console.log(err);
     }).on("close", () => {
-        res.end("Done");
+        res.end();
     });
 });
 
