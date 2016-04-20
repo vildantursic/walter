@@ -4,7 +4,7 @@ import {Http, Response, Headers, RequestOptions} from "angular2/http";
 import {Observable} from "rxjs/Rx";
 
 import {Walter} from "./object";
-import {ObjectService} from "./object.service.ts";
+import {ObjectService} from "./object.service";
 
 @Component({
   selector: "hero-detail",
