@@ -17,12 +17,12 @@ api.get(async (req: Request, res: Response) => {
     res.type("application/json");
 
     stream.on("data", (doc: string) => {
-        res.write(doc);
+        // res.write();
         entityIO.emit("entity", doc);
     }).on("error", (err: Error) => {
         console.log(err);
     }).on("close", () => {
-        res.end();
+        res.end(JSON.stringify({completed: true}));
     });
 });
 

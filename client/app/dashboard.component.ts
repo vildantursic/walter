@@ -1,4 +1,4 @@
-import {Component, OnInit, Pipe} from "angular2/core";
+import {Component, OnInit, Pipe, ChangeDetectionStrategy} from "angular2/core";
 import { Router } from "angular2/router";
 import { Walter } from "./object";
 import { ObjectService } from "./object.service";
@@ -9,8 +9,14 @@ class Data {
   transform(v: any, args: any[]) {
 
     if (v !== null && v.hasOwnProperty("_body")) {
-      console.log(JSON.parse(v._body));
-      return JSON.parse(v._body);
+
+      try {
+        return JSON.parse(v._body);
+      }
+      catch(e) {
+        console.log(v._body);
+      }
+
     } else {
       return v;
     }
@@ -21,7 +27,8 @@ class Data {
   selector: "dashboard",
   pipes: [Data],
   templateUrl: "views/dashboard-component.html",
-  styleUrls: ["styles/dashboard.component.css"]
+  styleUrls: ["styles/dashboard.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
@@ -31,8 +38,7 @@ export class DashboardComponent implements OnInit {
   constructor(private _router: Router, private _objectService: ObjectService) {
     let socket = io.connect("http://localhost:4000/entity");
     socket.on("entity", (data) => {
-      this.entity.push(JSON.parse(data));
-      // console.log(this.entity);
+      this.entity = [...this.entity, JSON.parse(data)];
     });
   }
 
