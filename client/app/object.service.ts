@@ -13,7 +13,11 @@ export class ObjectService {
     return this.http.get(this._objectsUrl + "entity")
                   .catch(this.handleError);
   }
-
+  /*
+  getObjectsSocket (): Observable<any> {
+    return Observable.webSocket("http://localhost:4000/entity");
+  }
+  */
   private handleError (error: Response): Observable<any> {
     return Observable.throw(error.json().error || "Server error");
   }

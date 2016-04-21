@@ -27,8 +27,7 @@ class Data {
   selector: "dashboard",
   pipes: [Data],
   templateUrl: "views/dashboard-component.html",
-  styleUrls: ["styles/dashboard.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["styles/dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
 
@@ -36,10 +35,18 @@ export class DashboardComponent implements OnInit {
   public entity: Array<Object> = [];
 
   constructor(private _router: Router, private _objectService: ObjectService) {
+
     let socket = io.connect("http://localhost:4000/entity");
     socket.on("entity", (data) => {
+      console.log(this.entity.length);
       this.entity = [...this.entity, JSON.parse(data)];
     });
+    /*
+    _objectService.getObjectsSocket()
+        .subscribe((data: any) => {
+          console.log(data);
+        });
+        */
   }
 
   ngOnInit() {
