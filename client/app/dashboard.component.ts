@@ -2,6 +2,7 @@ import {Component, OnInit, Pipe} from "angular2/core";
 import { Router } from "angular2/router";
 import { Walter } from "./object";
 import { ObjectService } from "./object.service";
+import * as io from "socket.io-client";
 
 @Pipe({name: "data"})
 class Data {
