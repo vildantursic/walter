@@ -2,6 +2,5 @@ node_modules
 .idea
 npm-debug.log
 server/**/*.js
-server/**/*.js.map
 client/app/**/*.js
-client/app/**/*.js.map
+*.js.map
