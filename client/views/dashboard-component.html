@@ -2,6 +2,12 @@
 <div class="grid grid-pad">
   {{objects | async | data | json}}
   <div>{{objects?.name | async | data | json}}</div>
+  <div>=======================</div>
+  <div *ngFor="#e of entity" class="col-1-4">
+    <div class="module object">
+      {{e.name}}
+    </div>
+  </div>
   <!--
   <div *ngFor="#object of objects | async | data" (click)="gotoDetail(object)" class="col-1-4">
     <div class="module object">

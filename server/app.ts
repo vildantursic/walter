@@ -5,6 +5,9 @@ import {urlencoded, json} from "body-parser";
 import * as io from "socket.io";
 import {bruteForce} from "./helpers/bruteForce";
 
+let server = require("http").Server(app);
+export let socketIO: SocketIO.Server = io.listen(server);
+
 // importing routes
 // token
 import {token} from "./routes/token";
@@ -46,10 +49,9 @@ app.use("/", bruteForce.prevent, apiObjects);
 // client app
 app.use(express.static(__dirname + "/../client"));
 
-const server = app.listen(4000, "localhost", () => {
+server.listen(4000, "localhost", () => {
    const port: number = server.address().port;
    console.log(__dirname);
    console.log("Listening on http://localhost:" + port);
 });
 
-export let socketIO: SocketIO.Server = io.listen(server);

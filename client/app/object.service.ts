@@ -9,12 +9,12 @@ export class ObjectService {
 
   private _objectsUrl: string = "http://localhost:4000/api/";
 
-  getObjects () {
+  getObjects (): Object {
     return this.http.get(this._objectsUrl + "entity")
                   .catch(this.handleError);
   }
 
-  private handleError (error: Response) {
+  private handleError (error: Response): Observable {
     console.error(error);
     return Observable.throw(error.json().error || "Server error");
   }

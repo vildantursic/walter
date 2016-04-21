@@ -3,11 +3,11 @@ import { Router } from "angular2/router";
 import { Walter } from "./object";
 import { ObjectService } from "./object.service";
 
-@Pipe({name: 'data'})
+@Pipe({name: "data"})
 class Data {
   transform(v: any, args: any[]) {
 
-    if(v !== null && v.hasOwnProperty("_body")) {
+    if (v !== null && v.hasOwnProperty("_body")) {
       console.log(JSON.parse(v._body));
       return JSON.parse(v._body);
     } else {
@@ -25,8 +25,15 @@ class Data {
 export class DashboardComponent implements OnInit {
 
   objects: any;
+  public entity: Array<Object> = [];
 
-  constructor(private _router: Router, private _objectService: ObjectService) {}
+  constructor(private _router: Router, private _objectService: ObjectService) {
+    let socket = io.connect("http://localhost:4000/entity");
+    socket.on("entity", (data) => {
+      this.entity.push(JSON.parse(data));
+      // console.log(this.entity);
+    });
+  }
 
   ngOnInit() {
     this.getTopObjects();
