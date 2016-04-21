@@ -1,6 +1,7 @@
 <h3>Top Heroes</h3>
 <div class="grid grid-pad">
   {{objects | async | data | json}}
+  <div>Items: {{entity.length}}</div>
   <div>=======================</div>
   <div *ngFor="#e of entity" class="col-1-4">
     <div class="module object">
