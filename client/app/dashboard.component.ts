@@ -27,7 +27,8 @@ class Data {
   selector: "dashboard",
   pipes: [Data],
   templateUrl: "views/dashboard-component.html",
-  styleUrls: ["styles/dashboard.component.css"]
+  styleUrls: ["styles/dashboard.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
