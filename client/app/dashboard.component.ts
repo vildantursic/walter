@@ -2,7 +2,7 @@ import {Component, OnInit, Pipe, ChangeDetectionStrategy} from "angular2/core";
 import { Router } from "angular2/router";
 import { Walter } from "./object";
 import { ObjectService } from "./object.service";
-import * as io from "socket.io-client";
+
 
 @Pipe({name: "data"})
 class Data {
@@ -27,8 +27,7 @@ class Data {
   selector: "dashboard",
   pipes: [Data],
   templateUrl: "views/dashboard-component.html",
-  styleUrls: ["styles/dashboard.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["styles/dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
 
@@ -37,17 +36,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(private _router: Router, private _objectService: ObjectService) {
 
-    let socket = io.connect("http://localhost:4000/entity");
-    socket.on("entity", (data) => {
-      console.log(this.entity.length);
-      this.entity = [...this.entity, JSON.parse(data)];
-    });
-    /*
-    _objectService.getObjectsSocket()
+    _objectService.getObjectsSocket("entity")
         .subscribe((data: any) => {
-          console.log(data);
+          this.entity = [...this.entity, JSON.parse(data)];
         });
-        */
   }
 
   ngOnInit() {

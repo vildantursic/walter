@@ -46,6 +46,7 @@ app.use("/", bruteForce.prevent, apiEntities);
 // object
 app.use("/", bruteForce.prevent, apiObject);
 app.use("/", bruteForce.prevent, apiObjects);
+
 // client app
 app.use(express.static(__dirname + "/../client"));
 
