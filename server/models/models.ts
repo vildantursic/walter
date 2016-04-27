@@ -4,4 +4,5 @@
 export * from "./object/model"
 export * from "./entity/model"
 export * from "./complex/model"
+export * from "./bim/model"
 export * from "./user/model"

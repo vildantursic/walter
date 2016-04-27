@@ -4,14 +4,13 @@ const app: express.Application = express();
 import {urlencoded, json} from "body-parser";
 import * as io from "socket.io";
 import {bruteForce} from "./helpers/bruteForce";
+import * as expressJWT from "express-jwt";
+import {key} from "./helpers/key";
 
 let server = require("http").Server(app);
 export let socketIO: SocketIO.Server = io.listen(server);
 
 // importing routes
-// token
-import {token} from "./routes/token";
-import {refreshToken} from "./routes/refresh-token";
 // complex
 import {apiComplex} from "./routes/complex";
 import {apiComplexes} from "./routes/complexes";
@@ -21,12 +20,14 @@ import {apiEntities} from "./routes/entities";
 // object
 import {apiObject} from "./routes/object";
 import {apiObjects} from "./routes/objects";
+// bim
+import {apiBim} from "./routes/bim";
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
 app.use(function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+   res.header("Access-Control-Allow-Origin", "http://localhost:*");
    // res.header("Access-Control-Allow-Credentials", true);
    // res.header("Authorization", "Bearer " + localStorage.token);
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -34,9 +35,6 @@ app.use(function(req, res, next) {
 });
 
 // app.use(expressJWT({ secret: key}).unless({path: ["/token"]}));
-// token
-app.use("/", bruteForce.prevent, token);
-app.use("/", bruteForce.prevent, refreshToken);
 // complex
 app.use("/", bruteForce.prevent, apiComplex);
 app.use("/", bruteForce.prevent, apiComplexes);
@@ -46,6 +44,8 @@ app.use("/", bruteForce.prevent, apiEntities);
 // object
 app.use("/", bruteForce.prevent, apiObject);
 app.use("/", bruteForce.prevent, apiObjects);
+// bim
+app.use("/", bruteForce.prevent, apiBim);
 
 // client app
 app.use(express.static(__dirname + "/../client"));

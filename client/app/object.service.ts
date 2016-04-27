@@ -1,6 +1,6 @@
 import {Injectable} from "angular2/core";
 import {Http, Response} from "angular2/http";
-import {Observable, Subscriber} from 'rxjs/Rx';
+import {Observable, Subscriber} from "rxjs/Rx";
 import * as io from "socket.io-client";
 
 @Injectable()
@@ -11,7 +11,7 @@ export class ObjectService {
   private _objectsUrl: string = "http://localhost:4000/api/";
 
   getObjects (): Observable<any> {
-    return this.http.get(this._objectsUrl + "entity")
+    return this.http.get(this._objectsUrl + "bim")
                   .catch(this.handleError);
   }
 

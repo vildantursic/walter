@@ -1,27 +1,28 @@
 import {Request, Response, Router} from "express";
 const router: Router = Router();
 import {IRoute} from "express-serve-static-core";
-import {complexModel} from "../models/models";
+import {bimModel} from "../models/models";
 import {Stream} from "stream";
-import {complexIO} from "../connections/socket";
+import {entityIO} from "../connections/socket";
 
-const api: IRoute = router.route("/api/complex");
+const api: IRoute = router.route("/api/bim");
 
 api.get(async (req: Request, res: Response) => {
-    let stream: Stream = await complexModel
+    let stream: Stream = await bimModel
         .find({})
-        .select({_id: 0, name: 1})
         .lean(true)
         .stream({ transform: JSON.stringify });
 
-    stream.on("data", (doc: Object) => {
-        res.write(doc, "ascii");
-        complexIO.emit("complex", doc);
+    res.type("application/json");
+
+    stream.on("data", (doc: string) => {
+        // res.write();
+        entityIO.emit("entity", doc);
     }).on("error", (err: Error) => {
         console.log(err);
     }).on("close", () => {
-        res.end("Done");
+        res.end(JSON.stringify({completed: true}));
     });
 });
 
-export const apiComplexes = router;
+export const apiBim = router;
