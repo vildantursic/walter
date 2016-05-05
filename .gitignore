@@ -1,7 +1,6 @@
 node_modules
 .idea
-typings/browser
-typings/main
+server/typings
 npm-debug.log
 server/**/*.js
 client/app/**/*.js
