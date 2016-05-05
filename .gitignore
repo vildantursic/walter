@@ -5,3 +5,4 @@ server/**/*.js
 client/app/**/*.js
 *.js.map
 typings
+!typings/main/ambient/walter-logger
