@@ -4,3 +4,4 @@ npm-debug.log
 server/**/*.js
 client/app/**/*.js
 *.js.map
+typings

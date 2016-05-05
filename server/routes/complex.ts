@@ -4,18 +4,21 @@ import {IRoute} from "express-serve-static-core";
 import {complexModel} from "../models/models";
 import {checkObjectIDValidity, checkIfDataIsArray} from "../helpers/validation";
 import {errorIDValidationMessages, errorApiMessages} from "../helpers/errorMessages";
+import {log} from "walter-logger";
 
 const api: IRoute = router.route("/api/complex/:id");
 
 api.get(async (req: Request, res: Response) => {
     let id: string = req.params.id;
     if (!checkObjectIDValidity(id)) {
+        log.alert("alert", errorIDValidationMessages.getMessage, ["complex"]);
         res.status(400).json(errorIDValidationMessages.getMessage);
     }
     let obj: Object = await complexModel
         .find({_id: id})
         .exec()
         .catch((e: Error) => {
+            log.error("error", errorIDValidationMessages.postMessage, ["complex"]);
             res.status(400).send({ error: errorApiMessages.postMessage + e });
         });
 

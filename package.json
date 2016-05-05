@@ -36,6 +36,8 @@
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "systemjs": "0.19.24",
+    "typings": "^0.7.12",
+    "walter-logger": "1.0.0",
     "zone.js": "^0.6.10"
   },
   "devDependencies": {
